@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        icon="@drawable/tab_home_icon"
+        id="@+id/nav_home"
+        title="@string/section_home" />
+    <tab
+        icon="@drawable/tab_category_icon"
+        id="@+id/nav_category"
+        title="@string/section_region" />
+    <tab
+        icon="@drawable/tab_dynamic_icon"
+        id="@+id/nav_dynamic"
+        title="@string/section_dynamic" />
+    <tab
+        icon="@drawable/tab_communicate_icon"
+        id="@+id/nav_ommunicate"
+        title="@string/section_message" />
+
+</tabs>

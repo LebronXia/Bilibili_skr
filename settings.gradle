@@ -1,0 +1,10 @@
+include ':app'
+
+//路由
+include ':router'
+
+//基础库,基础的第三方引用和共用的库和分享和推送的集成，以及共用的资源文件
+include ':basiclib',':basicres'
+
+//业务模块
+include ':component-homepage'

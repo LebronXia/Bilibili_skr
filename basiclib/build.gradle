@@ -1,0 +1,135 @@
+apply plugin: 'com.android.library'
+apply plugin: 'realm-android'
+apply plugin: 'com.alibaba.arouter'
+
+Properties properties = new Properties()
+File localPropertiesFile = project.rootProject.file("local.properties");
+if (localPropertiesFile.exists()) {
+    properties.load(localPropertiesFile.newDataInputStream())
+}
+
+android {
+    compileSdkVersion 26
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"//app version code
+        buildConfigField "int", "appVerCode", "" + rootProject.ext.android.versionCode + ""
+        //app version name
+        buildConfigField "String", "appVerName", "\"" + rootProject.ext.android.versionName + "\""
+        //application id
+        buildConfigField "String", "applicationId", "\"" + rootProject.ext.android.applicationId + "\""
+        //umeng app key
+        buildConfigField "String", "UMENG_APP_KEY", properties.getProperty("umengAppKey", "\"\"")
+        //umeng share
+        buildConfigField "String", "SINA_WEIBO_KEY", properties.getProperty("SINA_WEIBO_KEY", "\"\"")
+        buildConfigField "String", "SINA_WEIBO_SECRET", properties.getProperty("SINA_WEIBO_SECRET", "\"\"")
+        buildConfigField "String", "QQ_ZONE_ID", properties.getProperty("QQ_ZONE_ID", "\"\"")
+        buildConfigField "String", "QQ_ZONE_KEY", properties.getProperty("QQ_ZONE_KEY", "\"\"")
+        buildConfigField "String", "WEIXIN_ID", properties.getProperty("WEIXIN_ID", "\"\"")
+        buildConfigField "String", "WEIXIN_KEY", properties.getProperty("WEIXIN_KEY", "\"\"")
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "APP_DEBUG", "true"      //测试模式
+            minifyEnabled false
+            // signingConfig signingConfigs.rabtman
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            buildConfigField "boolean", "APP_DEBUG", "false"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    //res
+    api project(":basicres")
+    //router
+    api project(":router")
+    //ui
+    api(rootProject.ext.dependencies["dialog"]) {
+        exclude module: 'support-v4'
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-annotations'
+    }
+    api(rootProject.ext.dependencies["loadsir"]) {
+        exclude module: 'support-v4'
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-annotations'
+    }
+    api(rootProject.ext.dependencies["statusbarutil"]) {
+        exclude module: 'support-v4'
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-annotations'
+    }
+    api(rootProject.ext.dependencies["toast"]) {
+        exclude module: 'support-v4'
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-annotations'
+    }
+    api(rootProject.ext.dependencies["bottom-bar"]) {
+        exclude module: 'support-v4'
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-annotations'
+    }
+    //test
+    api rootProject.ext.dependencies["timber"]
+    testImplementation rootProject.ext.dependencies["junit"]
+    androidTestImplementation rootProject.ext.dependencies["runner"]
+    androidTestImplementation rootProject.ext.dependencies["espresso-core"]
+    //other
+    api rootProject.ext.dependencies["multidex"]
+    api rootProject.ext.dependencies["multitype"]
+    api rootProject.ext.dependencies["logger"]
+    api(rootProject.ext.dependencies["fragmentation"]) {
+        exclude module: 'support-v4'
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-annotations'
+    }
+    //json
+    api rootProject.ext.dependencies["gson"]
+    //image
+    api rootProject.ext.dependencies["glide"]
+    api rootProject.ext.dependencies["glide-loader-okhttp3"]
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+    //network
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["retrofit-converter-gson"]
+    api rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
+    api rootProject.ext.dependencies["okhttp"]
+    api rootProject.ext.dependencies["okhttp-logging-interceptor"]
+    //rx
+    api rootProject.ext.dependencies["rxjava"]
+    api rootProject.ext.dependencies["rxandroid"]
+    api rootProject.ext.dependencies["rxdownload"]
+    api(rootProject.ext.dependencies["rxpermissions2"]) {
+        exclude module: 'support-v4'
+        exclude module: 'appcompat-v7'
+        exclude module: 'support-annotations'
+    }
+    api rootProject.ext.dependencies["rxcache"]
+    api rootProject.ext.dependencies["rxcache-jolyglot"]
+    api rootProject.ext.dependencies["rxlifecycle"]
+    api rootProject.ext.dependencies["rxlifecycle-components"]
+    //di
+    api rootProject.ext.dependencies["dagger2"]
+    annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
+    api rootProject.ext.dependencies["butterknife"]
+    //umeng
+    //api rootProject.ext.dependencies["umeng"]
+    //canary
+    debugImplementation rootProject.ext.dependencies["blockcanary-android"]
+    releaseImplementation rootProject.ext.dependencies["blockcanary-no-op"]
+    debugImplementation rootProject.ext.dependencies["leakcanary-android"]
+    releaseImplementation rootProject.ext.dependencies["leakcanary-no-op"]
+}

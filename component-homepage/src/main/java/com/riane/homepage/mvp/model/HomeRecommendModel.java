@@ -1,0 +1,83 @@
+package com.riane.homepage.mvp.model;
+
+import com.riane.basiclib.base.mvp.BaseModel;
+import com.riane.basiclib.base.mvp.BasePresenter;
+import com.riane.basiclib.di.scope.FragmentScope;
+import com.riane.basiclib.integration.IRepositoryManager;
+import com.riane.homepage.api.ApiHelper;
+import com.riane.homepage.api.HomepageService;
+import com.riane.homepage.mvp.contract.IHomeRecommendContract;
+import com.riane.homepage.mvp.model.entity.DataListResponse;
+
+import javax.inject.Inject;
+
+import io.reactivex.Flowable;
+
+/**
+ * Created by zhengxiaobo on 2018/9/30.
+ */
+@FragmentScope
+public class HomeRecommendModel extends BaseModel implements IHomeRecommendContract.Model {
+
+    private String openEvent;
+    private String pull;
+    public static final int STATE_NORMAL = 0;
+    //首次获取数据
+    public static final int STATE_INITIAL = 1;
+    public static final int STATE_REFRESHING = 2;
+    public static final int STATE_LOAD_MORE = 3;
+
+    private static final String OPEN_EVENT_NULL = "";
+    private static final String OPEN_EVENT_HOT = "hot";
+    private static final String OPEN_EVENT_COLD = "cold";
+
+    @Inject
+    public HomeRecommendModel(IRepositoryManager repositoryManager) {
+        super(repositoryManager);
+    }
+
+    /**
+     * 根据请求状态更换参数
+     */
+    private void getIndex(final int oprationState){
+        switch (oprationState){
+            case STATE_INITIAL:
+                openEvent = OPEN_EVENT_COLD;
+                pull = "1";
+                break;
+            case STATE_REFRESHING:
+                openEvent = OPEN_EVENT_HOT;
+                pull = "1";
+                break;
+            case STATE_LOAD_MORE:
+                openEvent = OPEN_EVENT_NULL;
+                pull = "0";
+                break;
+        }
+
+    }
+
+    @Override
+    public Flowable<DataListResponse<Object>> getRecommendList(int idx, int operationState) {
+        getIndex(operationState);
+        return mRepositoryManager.obtainRetrofitService(HomepageService.class)
+                .getIndex(ApiHelper.ACCESS_KRY,
+                        ApiHelper.ACTIONKEY,
+                        ApiHelper.AD_EXTRA,
+                        ApiHelper.APP_KEY,
+                        ApiHelper.BANNER_HASH,
+                        ApiHelper.BUILD,
+                        ApiHelper.DEVICE,
+                        idx,
+                        ApiHelper.LOGIN_EVENT,
+                        ApiHelper.MOBI_APP,
+                        ApiHelper.NET_WORK,
+                        openEvent,
+                        ApiHelper.PLATFORM,
+                        pull,
+                        ApiHelper.QN,
+                        ApiHelper.STYLE,
+                        ApiHelper.TS
+                        );
+    }
+}

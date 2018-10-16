@@ -6,9 +6,15 @@ import com.riane.basiclib.di.scope.FragmentScope;
 import com.riane.basiclib.utils.RxUtil;
 import com.riane.homepage.mvp.contract.IHomeRecommendContract;
 import com.riane.homepage.mvp.model.HomeRecommendModel;
-import com.riane.homepage.mvp.model.entity.DataListResponse;
+import com.riane.basiclib.base.entity.DataListResponse;
+import com.riane.homepage.mvp.model.entity.RecommentIndexBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.functions.Function;
 
 /**
  * Created by zhengxiaobo on 2018/9/30.
@@ -23,12 +29,19 @@ public class HomeRecommentPresenter extends BasePresenter<IHomeRecommendContract
         super(model, rootView);
     }
 
-
+    /**
+     * 首次获取数据
+     * @param
+     */
     public void loadData(){
         state = HomeRecommendModel.STATE_INITIAL;
         getRecommmetnList(0, state);
     }
 
+    /**
+     * 刷新
+     * @param idx
+     */
     public void pullToRefresh(int idx){
         if (state == HomeRecommendModel.STATE_REFRESHING){
             return;
@@ -37,6 +50,10 @@ public class HomeRecommentPresenter extends BasePresenter<IHomeRecommendContract
         getRecommmetnList(idx, state);
     }
 
+    /**
+     * 下拉加载
+     * @param idx
+     */
     public void loadMore(int idx){
         if (state == HomeRecommendModel.STATE_LOAD_MORE){
             return;
@@ -48,11 +65,27 @@ public class HomeRecommentPresenter extends BasePresenter<IHomeRecommendContract
     private void getRecommmetnList(int idx, int operationState){
         addSubscribe(
                 mModel.getRecommendList(idx, operationState)
-                .compose(RxUtil.<DataListResponse<Object>>rxSchedulerHelper())
-                .subscribeWith(new CommonSubscriber<Object>(mView){
+                .compose(RxUtil.<DataListResponse<RecommentIndexBean>>rxSchedulerHelper())
+                        .map(new Function<DataListResponse<RecommentIndexBean>, List<RecommentIndexBean>>() {
+                            @Override
+                            public List<RecommentIndexBean> apply(DataListResponse<RecommentIndexBean> recommentIndexBeanDataListResponse) throws Exception {
+                                List<RecommentIndexBean> list = new ArrayList<>();
+                                for (RecommentIndexBean indexBean : recommentIndexBeanDataListResponse.getData()){
+                                    if (indexBean.getGotoX().equals("banner")){
+                                        indexBean.setType(RecommentIndexBean.BANNER);
+                                    } else {
+                                        indexBean.setType(RecommentIndexBean.INDEX);
+                                    }
+                                    list.add(indexBean);
+                                }
+                                return list;
+                            }
+                        })
+                .subscribeWith(new CommonSubscriber<List<RecommentIndexBean>>(mView){
                     @Override
-                    public void onNext(Object o) {
+                    public void onNext(List<RecommentIndexBean> o) {
                         super.onNext(o);
+                        mView.showRecommendList(o);
                     }
 
                     @Override

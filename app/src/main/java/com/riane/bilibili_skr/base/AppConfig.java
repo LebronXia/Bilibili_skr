@@ -7,6 +7,7 @@ import com.riane.basiclib.base.CommonApplicationLike;
 import com.riane.basiclib.di.module.GlobeConfigModule;
 import com.riane.basiclib.integration.ConfigModule;
 import com.riane.basiclib.integration.IRepositoryManager;
+import com.riane.bilibili_skr.R;
 
 import java.util.List;
 
@@ -18,7 +19,8 @@ public class AppConfig implements ConfigModule{
 
     @Override
     public void applyOptions(Context context, GlobeConfigModule.Builder builder) {
-
+        builder.statusBarColor(R.color.colorPrimary)
+                .statusBarAlpha(0);
     }
 
     @Override

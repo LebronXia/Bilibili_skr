@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">homepage</string>
+    <string name="homepage_app_name">homepage</string>
+
+    <string name="homepage_menu_top_game">游戏中心</string>
+    <string name="homepage_menu_top_search">搜索</string>
+    <string name="homepage_menu_top_download_tip">离线列表</string>
 </resources>

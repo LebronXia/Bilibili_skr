@@ -83,6 +83,7 @@ ext {
             "statusbarutil"             : "com.jaeger.statusbarutil:library:1.4.0",
             "toast"                     : "com.github.GrenderG:Toasty:1.2.8",
             "bottom-bar"                : "com.roughike:bottom-bar:2.3.1",
+            "mz-banner"                 : "com.github.pinguo-zhouwei:MZBannerView:v2.0.1",
             //test
             "timber"                   : "com.jakewharton.timber:timber:4.7.0",
             "junit"                     : "junit:junit:4.12",

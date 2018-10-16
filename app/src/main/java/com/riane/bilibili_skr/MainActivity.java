@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
+import com.jaeger.library.StatusBarUtil;
 import com.riane.basiclib.base.BaseActivity;
 import com.riane.basiclib.di.component.AppComponent;
 import com.riane.router.RouterConstans;
@@ -40,7 +41,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
         if (loadFragments.get(RouterConstans.PATH_HOMEPAGE_MAIN) == null){
             loadMultipleRootFragment(R.id.gl_contentContainer,
                     0,

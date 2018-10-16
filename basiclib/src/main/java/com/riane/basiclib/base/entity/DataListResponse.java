@@ -1,4 +1,4 @@
-package com.riane.homepage.mvp.model.entity;
+package com.riane.basiclib.base.entity;
 
 import java.util.List;
 
@@ -14,7 +14,6 @@ public class DataListResponse<T> {
     public int getCode() {
         return code;
     }
-
     public void setCode(int code) {
         this.code = code;
     }

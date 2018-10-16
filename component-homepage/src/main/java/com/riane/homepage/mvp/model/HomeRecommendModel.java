@@ -1,13 +1,13 @@
 package com.riane.homepage.mvp.model;
 
 import com.riane.basiclib.base.mvp.BaseModel;
-import com.riane.basiclib.base.mvp.BasePresenter;
 import com.riane.basiclib.di.scope.FragmentScope;
 import com.riane.basiclib.integration.IRepositoryManager;
 import com.riane.homepage.api.ApiHelper;
 import com.riane.homepage.api.HomepageService;
 import com.riane.homepage.mvp.contract.IHomeRecommendContract;
-import com.riane.homepage.mvp.model.entity.DataListResponse;
+import com.riane.basiclib.base.entity.DataListResponse;
+import com.riane.homepage.mvp.model.entity.RecommentIndexBean;
 
 import javax.inject.Inject;
 
@@ -58,7 +58,7 @@ public class HomeRecommendModel extends BaseModel implements IHomeRecommendContr
     }
 
     @Override
-    public Flowable<DataListResponse<Object>> getRecommendList(int idx, int operationState) {
+    public Flowable<DataListResponse<RecommentIndexBean>> getRecommendList(int idx, int operationState) {
         getIndex(operationState);
         return mRepositoryManager.obtainRetrofitService(HomepageService.class)
                 .getIndex(ApiHelper.ACCESS_KRY,

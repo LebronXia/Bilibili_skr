@@ -132,6 +132,8 @@ dependencies {
     api rootProject.ext.dependencies["butterknife"]
     //umeng
     //api rootProject.ext.dependencies["umeng"]
+    //retrofit-url_manager
+    api rootProject.ext.dependencies["retrofit-url_manager"]
     //canary
     debugImplementation rootProject.ext.dependencies["blockcanary-android"]
     releaseImplementation rootProject.ext.dependencies["blockcanary-no-op"]

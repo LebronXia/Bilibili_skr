@@ -85,7 +85,8 @@ public class HomeRecommentPresenter extends BasePresenter<IHomeRecommendContract
                     @Override
                     public void onNext(List<RecommentIndexBean> o) {
                         super.onNext(o);
-                        mView.showRecommendList(o);
+                        mView.showRecommendList(o, state);
+                        mView.showPageContent();
                     }
 
                     @Override
@@ -97,6 +98,8 @@ public class HomeRecommentPresenter extends BasePresenter<IHomeRecommendContract
                     @Override
                     public void onComplete() {
                         super.onComplete();
+                        mView.hideLoading();
+                        state = HomeRecommendModel.STATE_NORMAL;
                     }
                 })
         );

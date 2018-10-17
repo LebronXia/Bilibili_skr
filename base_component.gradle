@@ -28,6 +28,7 @@ android {
         }
         versionCode 1
         versionName "1.0.0"
+        //给 Module 内的资源名增加前缀, 避免资源名冲突
         resourcePrefix componentName + "_"
         resValue "string", componentName + "_module_name", project.getName()
     }
@@ -43,8 +44,18 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
+            buildConfigField "boolean", "APP_DEBUG", "true"      //测试模式
+            buildConfigField "boolean", "IS_RUN_ALONE", "${isRunAlone}"
             minifyEnabled false
+            // signingConfig signingConfigs.rabtman
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            buildConfigField "boolean", "APP_DEBUG", "false"
+            buildConfigField "boolean", "IS_RUN_ALONE", "${isRunAlone}"
+            minifyEnabled true
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

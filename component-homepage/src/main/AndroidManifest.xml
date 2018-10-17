@@ -3,7 +3,7 @@
     package="com.riane.homepage" >
 
     <application
-        android:label="@string/app_name"
+        android:label="@string/homepage_module_name"
         tools:replace="android:label">
 
         <meta-data

@@ -11,7 +11,7 @@ ext {
 
     //合并到主程序运行的组件
     merge = [
-            "homepage"
+           // "homepage"
     ]
 
     def dependVersion = [
@@ -91,6 +91,8 @@ ext {
             "runner"                    : 'com.android.support.test:runner:1.0.2',
             //umeng
             "umeng"                     : "com.umeng.analytics:analytics:6.1.1",
+            //http
+            "retrofit-url_manager"      : "me.jessyan:retrofit-url-manager:1.4.0",
             //canary  UI卡顿和内存泄露
             "blockcanary-android"       : "com.github.markzhai:blockcanary-android:${dependVersion.blockcanary}",
             "blockcanary-no-op"         : "com.github.markzhai:blockcanary-no-op:${dependVersion.blockcanary}",

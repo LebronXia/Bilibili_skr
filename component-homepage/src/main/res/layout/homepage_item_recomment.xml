@@ -28,6 +28,7 @@
                 android:id="@+id/imageview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:scaleType="fitXY"
                 />
 
             <View
@@ -97,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_medium"
-            android:paddingBottom="@dimen/padding_12"
+            android:paddingBottom="3dp"
             android:paddingTop="@dimen/padding_12"
             android:textSize="14sp"
             android:lines="2"
@@ -105,8 +106,6 @@
             android:ellipsize="end"
             />
 
-
     </LinearLayout>
-
 
 </android.support.v7.widget.CardView>

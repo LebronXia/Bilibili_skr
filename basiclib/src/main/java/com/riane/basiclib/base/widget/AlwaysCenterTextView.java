@@ -1,4 +1,4 @@
-package com.riane.basiclib.widget;
+package com.riane.basiclib.base.widget;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatTextView;

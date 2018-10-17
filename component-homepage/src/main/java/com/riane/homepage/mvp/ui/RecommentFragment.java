@@ -6,6 +6,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.hss01248.dialog.StyledDialog;
+import com.hss01248.dialog.interfaces.MyDialogListener;
 import com.riane.basiclib.base.BaseFragment;
 import com.riane.basiclib.di.component.AppComponent;
 import com.riane.homepage.R;
@@ -13,6 +16,7 @@ import com.riane.homepage.R2;
 import com.riane.homepage.di.component.DaggerRecommendListComponent;
 import com.riane.homepage.di.module.RecommendListModule;
 import com.riane.homepage.mvp.contract.IHomeRecommendContract;
+import com.riane.homepage.mvp.model.HomeRecommendModel;
 import com.riane.homepage.mvp.model.entity.RecommentIndexBean;
 import com.riane.homepage.mvp.presenter.HomeRecommentPresenter;
 import com.riane.homepage.mvp.ui.adapter.RecommentAdapter;
@@ -53,31 +57,113 @@ public class RecommentFragment extends BaseFragment<HomeRecommentPresenter> impl
     }
 
     @Override
-    protected void initData() {
-        mPresenter.pullToRefresh(0);
+    protected void onPageRetry(android.view.View v) {
+        mPresenter.loadData();
     }
 
     @Override
-    public void showRecommendList(List<RecommentIndexBean> recommendList) {
-        if (recommendList != null){
-            mIndexBeanList = recommendList;
-            mRecommentAdapter = new RecommentAdapter(mIndexBeanList);
-            GridLayoutManager layoutManager = new GridLayoutManager(getContext(), SPAN_COUNT);
-            layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    //因为在声明gridlayoutManager的时候进行了设置，so每一行2个span
-                    switch (mRecommentAdapter.getItem(position).getItemType()) {
-                        case RecommentIndexBean.BANNER:
-                            return SPAN_COUNT;//占据两个位置的span
-                        default:
-                            return 1;//占据一个位置
-                    }
+    protected boolean useLoadSir() {
+        return true;
+    }
+
+    @Override
+    protected void initData() {
+        mRecommentAdapter = new RecommentAdapter(mIndexBeanList);
+        mRcvRecommend.setAdapter(mRecommentAdapter);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), SPAN_COUNT);
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (mRecommentAdapter.getItem(position) == null){
+                    return 2;
                 }
-            });
-            mRcvRecommend.setLayoutManager(layoutManager);
-            mRcvRecommend.setAdapter(mRecommentAdapter);
+                switch (mRecommentAdapter.getItem(position).getItemType()) {
+                    case RecommentIndexBean.BANNER:
+                        return 2;//占据两个位置的span
+                    default:
+                        return 1;//占据一个位置
+                }
+            }
+        });
+        layoutManager.getSpanSizeLookup().setSpanIndexCacheEnabled(true);
+        mRcvRecommend.setLayoutManager(layoutManager);
+        mRcvRecommend.setNestedScrollingEnabled(false);
+        mRecommentAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                int amount = mRecommentAdapter.getItemCount();
+                RecommentIndexBean indexBean = mRecommentAdapter.getItem(mRecommentAdapter.getItemCount() - 2);
+                mPresenter.loadMore(indexBean.getIdx() - 1);
+            }
+        });
+        mSwipefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                pullToRefresh();
+            }
+        });
+        setSwipeRefreshLayout(mSwipefresh);
+        mPresenter.loadData();
+    }
+
+    private void pullToRefresh(){
+        if (mIndexBeanList == null || mIndexBeanList.size() == 0){
+            mPresenter.loadData();
+        }
+        int idx = mIndexBeanList.get(0).getIdx() + 1;
+        mPresenter.pullToRefresh(idx);
+    }
+
+    private void showTextLoading() {
+        StyledDialog.buildIosAlert("title", "啊哈哈哈哈哈哈哈哈",new MyDialogListener(){
+            @Override
+            public void onThird() {
+                super.onThird();
+            }
+
+            @Override
+            public void onFirst() {
+                StyledDialog.dismissLoading();
+            }
+
+            @Override
+            public void onSecond() {
+
+            }
+        }).setBtnSize(14)
+                .setBtnText("再考虑一下", "取消", "确定")
+                .show();
+    }
+
+    @Override
+    public void showRecommendList(List<RecommentIndexBean> recommendList, int refreshStatus) {
+        if (mSwipefresh.isRefreshing()) {
+            mSwipefresh.setRefreshing(false);
+        }
+        mIndexBeanList = recommendList;
+        switch (refreshStatus){
+            case HomeRecommendModel.STATE_INITIAL:
+                mRecommentAdapter.setNewData(mIndexBeanList);
+                break;
+            case HomeRecommendModel.STATE_REFRESHING:
+                mRecommentAdapter.setNewData(mIndexBeanList);
+                break;
+            case HomeRecommendModel.STATE_LOAD_MORE:
+                mRecommentAdapter.addData(mIndexBeanList);
+                mRecommentAdapter.loadMoreComplete();
+                break;
         }
 
+        //showTextLoading();
+
+    }
+
+
+    @Override
+    public void showError(int stringId) {
+        if (mSwipefresh.isRefreshing()) {
+            mSwipefresh.setRefreshing(false);
+        }
+        super.showError(stringId);
     }
 }

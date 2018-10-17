@@ -1,10 +1,12 @@
 package com.riane.homepage.api;
 
 import com.riane.basiclib.base.entity.DataListResponse;
+import com.riane.basiclib.base.entity.ResultObjectResponse;
 import com.riane.homepage.mvp.model.entity.RecommentIndexBean;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Query;
 
 /**
@@ -31,10 +33,22 @@ public interface  HomepageService {
                                                             @Query("network") String network,
                                                             @Query("open_event") String openEvent,
                                                             @Query("platform") String platForm,
-                                                            @Query("pull") String pull,
+                                                            @Query("pull") boolean pull,
                                                             @Query("qn") String qn,
                                                             @Query("style") int style,
-                                                            @Query("ts") String ts
-                                        );
+                                                            @Query("ts") String ts);
+
+
+    /**
+     * 获取追番数据
+     * @return
+     */
+    @Headers("Domain-Name: bangumi")
+    @GET("appindex/follow_index_page")
+    Flowable<ResultObjectResponse<Object>> getBangumi(@Query("appkey") String appkey,
+                                                      @Query("build") String build,
+                                                      @Query("mobi_app") String mobi_app,
+                                                      @Query("platform") String platform,
+                                                      @Query("ts") String ts);
 
 }

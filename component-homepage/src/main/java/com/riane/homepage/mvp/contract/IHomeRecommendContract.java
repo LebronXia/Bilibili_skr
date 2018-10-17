@@ -16,7 +16,7 @@ import io.reactivex.Flowable;
 public interface IHomeRecommendContract {
 
     interface View extends IView {
-        void showRecommendList(List<RecommentIndexBean> recommendList);
+        void showRecommendList(List<RecommentIndexBean> recommendList, int refreshStatus);
     }
 
     interface Model extends IModel {

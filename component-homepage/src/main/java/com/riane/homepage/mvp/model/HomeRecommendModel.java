@@ -20,7 +20,8 @@ import io.reactivex.Flowable;
 public class HomeRecommendModel extends BaseModel implements IHomeRecommendContract.Model {
 
     private String openEvent;
-    private String pull;
+    private int loginEvent;
+    private boolean pull;
     public static final int STATE_NORMAL = 0;
     //首次获取数据
     public static final int STATE_INITIAL = 1;
@@ -28,8 +29,10 @@ public class HomeRecommendModel extends BaseModel implements IHomeRecommendContr
     public static final int STATE_LOAD_MORE = 3;
 
     private static final String OPEN_EVENT_NULL = "";
-    private static final String OPEN_EVENT_HOT = "hot";
     private static final String OPEN_EVENT_COLD = "cold";
+
+    private static final int LOGIN_EVENT_NORMAL = 0;
+    private static final int LOGIN_EVENT_INITIAL = 1;
 
     @Inject
     public HomeRecommendModel(IRepositoryManager repositoryManager) {
@@ -43,15 +46,18 @@ public class HomeRecommendModel extends BaseModel implements IHomeRecommendContr
         switch (oprationState){
             case STATE_INITIAL:
                 openEvent = OPEN_EVENT_COLD;
-                pull = "1";
+                loginEvent = LOGIN_EVENT_INITIAL;
+                pull = true;
                 break;
             case STATE_REFRESHING:
-                openEvent = OPEN_EVENT_HOT;
-                pull = "1";
+                openEvent = OPEN_EVENT_NULL;
+                loginEvent = LOGIN_EVENT_NORMAL;
+                pull = true;
                 break;
             case STATE_LOAD_MORE:
                 openEvent = OPEN_EVENT_NULL;
-                pull = "0";
+                loginEvent = LOGIN_EVENT_NORMAL;
+                pull = false;
                 break;
         }
 
@@ -69,7 +75,7 @@ public class HomeRecommendModel extends BaseModel implements IHomeRecommendContr
                         ApiHelper.BUILD,
                         ApiHelper.DEVICE,
                         idx,
-                        ApiHelper.LOGIN_EVENT,
+                        loginEvent,
                         ApiHelper.MOBI_APP,
                         ApiHelper.NET_WORK,
                         openEvent,

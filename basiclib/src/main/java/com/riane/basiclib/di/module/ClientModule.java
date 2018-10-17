@@ -28,6 +28,7 @@ import dagger.Module;
 import dagger.Provides;
 import io.rx_cache2.internal.RxCache;
 import io.victoralbertos.jolyglot.GsonSpeaker;
+import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -100,7 +101,7 @@ public abstract class ClientModule {
         if (configuration != null){
             configuration.configOkhttp(application, builder);
         }
-        return builder
+        return RetrofitUrlManager.getInstance().with(builder)
                 .build();
     }
 

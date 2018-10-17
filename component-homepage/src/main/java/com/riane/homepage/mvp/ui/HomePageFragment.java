@@ -18,6 +18,7 @@ import com.riane.basiclib.di.component.AppComponent;
 import com.riane.homepage.R;
 import com.riane.homepage.R2;
 import com.riane.homepage.mvp.ui.adapter.HomepagePageAdapter;
+import com.riane.homepage.mvp.ui.fragment.BangumiFragment;
 import com.riane.router.RouterConstans;
 
 import java.util.ArrayList;
@@ -56,6 +57,9 @@ public class HomePageFragment extends SimpleFragment{
 
         RecommentFragment recommentFragment = new RecommentFragment();
         mFragments.add(recommentFragment);
+
+        BangumiFragment bangumiFragment = new BangumiFragment();
+        mFragments.add(bangumiFragment);
 
         mHomepagePageAdapter = new HomepagePageAdapter(getFragmentManager(), mFragments);
         mViewPager.setAdapter(mHomepagePageAdapter);

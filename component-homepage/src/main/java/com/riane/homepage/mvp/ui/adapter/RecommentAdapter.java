@@ -1,13 +1,19 @@
 package com.riane.homepage.mvp.ui.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.riane.basiclib.imageloader.ImageLoader;
 import com.riane.basiclib.imageloader.glide.GlideImageConfig;
+import com.riane.basiclib.utils.ImageUtil;
+import com.riane.basiclib.utils.StringUtil;
 import com.riane.basiclib.utils.Utils;
 import com.riane.homepage.R;
 import com.riane.homepage.mvp.model.entity.HomepageBannerBean;
@@ -43,22 +49,19 @@ public class RecommentAdapter extends BaseMultiItemQuickAdapter<RecommentIndexBe
                     }
                 });
                 bannerview.start();
+               // ImageUtil.load(mContext, item.getBanner_item().get(0).getImage(), (ImageView) helper.getView(R.id.banner_image));
                 break;
             case RecommentIndexBean.INDEX:
-                //helper.setText(R.id.tv_play_amount, item.getPlay());
-                //helper.setText(R.id.tv_reply_amount, item.getReply());
+                helper.setText(R.id.tv_play_amount, StringUtil.numberToWord(item.getPlay()));
+                helper.setText(R.id.tv_reply_amount, item.getReply() + "");
+                helper.setText(R.id.tv_duration, StringUtil.secToTime(item.getDuration()));
                 helper.setText(R.id.tv_title, item.getTitle());
                 helper.setText(R.id.tv_name, item.getTag() == null ? "" : item.getTag().getTag_name());
-                Utils.getAppComponent().imageLoder()
-                        .loadImage(mContext,
-                                GlideImageConfig
-                                        .builder()
-                                        .url(item.getCover())
-                                        .imagerView((ImageView) helper.getView(R.id.imageview))
-                                        .build());
+                ImageUtil.load(mContext, item.getCover(), (ImageView) helper.getView(R.id.imageview));
                 break;
         }
     }
+
 
     public static class BannerViewHolder implements MZViewHolder<HomepageBannerBean> {
         private ImageView mImageView;

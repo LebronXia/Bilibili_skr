@@ -4,4 +4,10 @@
     <string name="homepage_menu_top_game">游戏中心</string>
     <string name="homepage_menu_top_search">搜索</string>
     <string name="homepage_menu_top_download_tip">离线列表</string>
+
+    <string name="homepage_bangumi_index_status_format_1">更新至%s</string>
+    <string name="homepage_bangumi_index_status_format_2">全%s话</string>
+    <string name="homepage_bangumi_index_status_format_3">更新至第%s话</string>
+    <string name="homepage_bangumi_index_text_suffix_hit">%s人追番</string>
+    <string name="homepage_bangumi_timeline_title">时间表</string>
 </resources>

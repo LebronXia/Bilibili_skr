@@ -2,6 +2,7 @@ package com.riane.homepage.api;
 
 import com.riane.basiclib.base.entity.DataListResponse;
 import com.riane.basiclib.base.entity.ResultObjectResponse;
+import com.riane.homepage.mvp.model.entity.HomeBangumiBean;
 import com.riane.homepage.mvp.model.entity.RecommentIndexBean;
 
 import io.reactivex.Flowable;
@@ -45,10 +46,10 @@ public interface  HomepageService {
      */
     @Headers("Domain-Name: bangumi")
     @GET("appindex/follow_index_page")
-    Flowable<ResultObjectResponse<Object>> getBangumi(@Query("appkey") String appkey,
-                                                      @Query("build") String build,
-                                                      @Query("mobi_app") String mobi_app,
-                                                      @Query("platform") String platform,
-                                                      @Query("ts") String ts);
+    Flowable<ResultObjectResponse<HomeBangumiBean>> getBangumi(@Query("appkey") String appkey,
+                                                               @Query("build") String build,
+                                                               @Query("mobi_app") String mobi_app,
+                                                               @Query("platform") String platform,
+                                                               @Query("ts") String ts);
 
 }

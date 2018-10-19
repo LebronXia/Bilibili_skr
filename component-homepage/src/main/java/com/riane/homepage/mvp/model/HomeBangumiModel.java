@@ -8,6 +8,7 @@ import com.riane.basiclib.utils.DateUtil;
 import com.riane.homepage.api.ApiHelper;
 import com.riane.homepage.api.HomepageService;
 import com.riane.homepage.mvp.contract.IHomeBangumiContract;
+import com.riane.homepage.mvp.model.entity.HomeBangumiBean;
 
 import javax.inject.Inject;
 
@@ -24,7 +25,7 @@ public class HomeBangumiModel extends BaseModel implements IHomeBangumiContract.
     }
 
     @Override
-    public Flowable<ResultObjectResponse<Object>> getBangumiList() {
+    public Flowable<ResultObjectResponse<HomeBangumiBean>> getBangumiList() {
         return mRepositoryManager.obtainRetrofitService(HomepageService.class)
                 .getBangumi(ApiHelper.APP_KEY,
                             ApiHelper.BUILD,

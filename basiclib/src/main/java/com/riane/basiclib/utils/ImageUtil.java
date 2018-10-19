@@ -21,4 +21,16 @@ public class ImageUtil {
                                 .imagerView(imageView)
                                 .build());
     }
+
+    public static void loadWidthAndHeight(Context context, String url, ImageView imageView, int width, int height){
+        Utils.getAppComponent().imageLoder()
+                .loadImage(context,
+                        GlideImageConfig
+                                .builder()
+                                .url(url)
+                                .placeholder( R.drawable.bili_default_image_tv) //加载成功前显示的图片
+                                .override(width, height)
+                                .imagerView(imageView)
+                                .build());
+    }
 }

@@ -4,13 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="敬请期待"
-        android:textSize="20sp"
-        android:textColor="@color/colorPrimary"
-        android:layout_centerInParent="true"
-        />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="敬请期待"-->
+        <!--android:textSize="20sp"-->
+        <!--android:textColor="@color/colorPrimary"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--/>-->
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swip_bangumi_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_bangumi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

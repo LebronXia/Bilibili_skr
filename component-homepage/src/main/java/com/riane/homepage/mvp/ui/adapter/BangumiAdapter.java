@@ -13,6 +13,7 @@ import com.riane.basiclib.utils.DimenUtils;
 import com.riane.basiclib.utils.ImageUtil;
 import com.riane.basiclib.utils.StringUtil;
 import com.riane.homepage.R;
+import com.riane.homepage.mvp.model.entity.BangumiRecommendFallBean;
 import com.riane.homepage.mvp.model.entity.HomeBangumiBean;
 import com.riane.homepage.mvp.model.entity.Item;
 import com.riane.homepage.mvp.model.entity.Items;
@@ -81,6 +82,17 @@ public class BangumiAdapter extends BaseMultiItemQuickAdapter<Item, BaseViewHold
                     });
                 break;
             case Item.BANGUMI_INDEX_FALL:
+                BangumiRecommendFallBean recommendFallBean = (BangumiRecommendFallBean) item.getData();
+                if (recommendFallBean != null){
+                    ImageUtil.load(mContext, recommendFallBean.getCover(), (ImageView) helper.getView(R.id.iv_cover));
+                    helper.setText(R.id.tv_title, recommendFallBean.getTitle());
+                    if (TextUtils.isEmpty(recommendFallBean.getDesc())){
+                        helper.getView(R.id.tv_des).setVisibility(View.GONE);
+                    } else {
+                        helper.getView(R.id.tv_des).setVisibility(View.VISIBLE);
+                        helper.setText(R.id.tv_des, recommendFallBean.getDesc());
+                    }
+                }
                 break;
         }
     }

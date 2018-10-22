@@ -1,4 +1,4 @@
-package com.riane.homepage.api;
+package com.riane.basiclib.http.api;
 
 /**
  * BIlibili的API常量

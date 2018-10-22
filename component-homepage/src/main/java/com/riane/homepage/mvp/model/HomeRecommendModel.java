@@ -3,7 +3,7 @@ package com.riane.homepage.mvp.model;
 import com.riane.basiclib.base.mvp.BaseModel;
 import com.riane.basiclib.di.scope.FragmentScope;
 import com.riane.basiclib.integration.IRepositoryManager;
-import com.riane.homepage.api.ApiHelper;
+import com.riane.basiclib.http.api.ApiHelper;
 import com.riane.homepage.api.HomepageService;
 import com.riane.homepage.mvp.contract.IHomeRecommendContract;
 import com.riane.basiclib.base.entity.DataListResponse;

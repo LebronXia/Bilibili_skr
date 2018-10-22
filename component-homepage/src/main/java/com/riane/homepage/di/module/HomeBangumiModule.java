@@ -2,9 +2,7 @@ package com.riane.homepage.di.module;
 
 import com.riane.basiclib.di.scope.FragmentScope;
 import com.riane.homepage.mvp.contract.IHomeBangumiContract;
-import com.riane.homepage.mvp.contract.IHomeRecommendContract;
 import com.riane.homepage.mvp.model.HomeBangumiModel;
-import com.riane.homepage.mvp.model.HomeRecommendModel;
 
 import dagger.Module;
 import dagger.Provides;

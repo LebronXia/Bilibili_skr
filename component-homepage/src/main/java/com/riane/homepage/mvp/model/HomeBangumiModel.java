@@ -1,13 +1,15 @@
 package com.riane.homepage.mvp.model;
 
+import com.riane.basiclib.base.entity.ResultListResponse;
 import com.riane.basiclib.base.entity.ResultObjectResponse;
 import com.riane.basiclib.base.mvp.BaseModel;
 import com.riane.basiclib.di.scope.FragmentScope;
 import com.riane.basiclib.integration.IRepositoryManager;
 import com.riane.basiclib.utils.DateUtil;
-import com.riane.homepage.api.ApiHelper;
+import com.riane.basiclib.http.api.ApiHelper;
 import com.riane.homepage.api.HomepageService;
 import com.riane.homepage.mvp.contract.IHomeBangumiContract;
+import com.riane.homepage.mvp.model.entity.BangumiRecommendFallBean;
 import com.riane.homepage.mvp.model.entity.HomeBangumiBean;
 
 import javax.inject.Inject;
@@ -19,6 +21,7 @@ import io.reactivex.Flowable;
  */
 @FragmentScope
 public class HomeBangumiModel extends BaseModel implements IHomeBangumiContract.Model{
+
     @Inject
     public HomeBangumiModel(IRepositoryManager repositoryManager) {
         super(repositoryManager);
@@ -33,5 +36,17 @@ public class HomeBangumiModel extends BaseModel implements IHomeBangumiContract.
                             ApiHelper.PLATFORM,
                             DateUtil.getSystemTime()
                         );
+    }
+
+    @Override
+    public Flowable<ResultListResponse<BangumiRecommendFallBean>> getBangumiFallList(long cursor) {
+        return mRepositoryManager.obtainRetrofitService(HomepageService.class)
+                .getBnagumiFall(ApiHelper.APP_KEY,
+                        ApiHelper.BUILD,
+                        cursor,
+                        ApiHelper.MOBI_APP,
+                        ApiHelper.PLATFORM,
+                        DateUtil.getSystemTime())
+                ;
     }
 }

@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/basiclib" />
             <option value="$PROJECT_DIR$/basicres" />
+            <option value="$PROJECT_DIR$/component-channel" />
             <option value="$PROJECT_DIR$/component-homepage" />
             <option value="$PROJECT_DIR$/router" />
           </set>

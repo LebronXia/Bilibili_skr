@@ -10,12 +10,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hss01248.dialog.StyledDialog;
 import com.kingja.loadsir.callback.Callback;
 import com.kingja.loadsir.core.LoadService;
 import com.kingja.loadsir.core.LoadSir;
+import com.riane.basiclib.R;
 import com.riane.basiclib.base.mvp.IView;
 import com.riane.basiclib.base.widget.loadsir.EmptyCallback;
 import com.riane.basiclib.base.widget.loadsir.LoadingCallback;
@@ -90,18 +92,37 @@ public abstract class SimpleFragment extends SupportFragment implements IView{
         mUnBinder.unbind();
     }
 
-    protected void setToolBar(Toolbar toolbar, String title) {
-        toolbar.setTitle(title);
+    protected void setToolBar(Toolbar toolbar, String title, boolean isCenter, boolean isBack) {
+        toolbar.setTitle("");
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressedSupport();
-            }
-        });
+        if (isCenter){
+            toolbar.findViewById(R.id.toolbar_left_layout).setVisibility(View.GONE);
+            ((TextView)toolbar.findViewById(R.id.tv_title)).setVisibility(View.VISIBLE);
+            ((TextView)toolbar.findViewById(R.id.tv_title)).setText(title);
+        } else {
+            toolbar.findViewById(R.id.toolbar_left_layout).setVisibility(View.VISIBLE);
+            ((TextView)toolbar.findViewById(R.id.tv_title)).setVisibility(View.GONE);
+            ((TextView)toolbar.findViewById(R.id.tv_title)).setText(title);
+        }
+
+        if (isBack){
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            //使左上角图标是否显示
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onBackPressedSupport();
+                }
+            });
+        } else {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            //使左上角图标是否显示
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
+
+        }
     }
+
 
     @Override
     public void onSupportVisible() {

@@ -1,7 +1,9 @@
 package com.riane.homepage.api;
 
 import com.riane.basiclib.base.entity.DataListResponse;
+import com.riane.basiclib.base.entity.ResultListResponse;
 import com.riane.basiclib.base.entity.ResultObjectResponse;
+import com.riane.homepage.mvp.model.entity.BangumiRecommendFallBean;
 import com.riane.homepage.mvp.model.entity.HomeBangumiBean;
 import com.riane.homepage.mvp.model.entity.RecommentIndexBean;
 
@@ -51,5 +53,20 @@ public interface  HomepageService {
                                                                @Query("mobi_app") String mobi_app,
                                                                @Query("platform") String platform,
                                                                @Query("ts") String ts);
+
+    /**
+     * 获取编辑推荐数据
+     * @return
+     */
+    @Headers("Domain-Name: bangumi")
+    @GET("/appindex/follow_index_fall")
+    Flowable<ResultListResponse<BangumiRecommendFallBean>> getBnagumiFall(@Query("appkey") String appkey,
+                                                                          @Query("build") String build,
+                                                                          @Query("cursor") long cursor,
+                                                                          @Query("mobi_app") String mobi_app,
+                                                                          @Query("platform") String platform,
+                                                                          @Query("ts") String ts);
+
+
 
 }

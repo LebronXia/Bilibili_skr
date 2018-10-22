@@ -90,6 +90,28 @@ public abstract class ClientModule {
 
             });
 
+        Interceptor signInterceptor = new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request oldRequest = chain.request();
+                String sign = SignUtil.getSign(oldRequest.url());
+                //添加sign参数
+                HttpUrl.Builder newBuilder = oldRequest.url()
+                        .newBuilder()
+                        .scheme(oldRequest.url().scheme())
+                        .host(oldRequest.url().host())
+                        .addQueryParameter(SignUtil.PARAM_SIGN, sign);
+                Request newRequest = oldRequest.newBuilder()
+                        .method(oldRequest.method(), oldRequest.body())
+                        .url(newBuilder.build())
+                        .build();
+                return chain.proceed(newRequest);
+            }
+        };
+
+        //配置sign参数
+        builder.addInterceptor(signInterceptor);
+
         //如果外部提供了interceptor的数组则遍历添加
         if (interceptors != null && interceptors.size() > 0) {
             for (Interceptor interceptor : interceptors) {

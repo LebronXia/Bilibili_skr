@@ -9,5 +9,8 @@ public class RouterConstans {
     //HomePage
     public static final String PATH_HOMEPAGE_MAIN = "/homepage/main";
 
+    //Channel
+    public static final String PATH_CHANNEL = "/channel/main";
+
 
 }

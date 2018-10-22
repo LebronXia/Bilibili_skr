@@ -144,4 +144,6 @@ dependencies {
     releaseImplementation rootProject.ext.dependencies["blockcanary-no-op"]
     debugImplementation rootProject.ext.dependencies["leakcanary-android"]
     releaseImplementation rootProject.ext.dependencies["leakcanary-no-op"]
+
+    annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
 }

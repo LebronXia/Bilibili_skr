@@ -53,6 +53,7 @@ public class CommonApplicationLike implements IApplicationLike{
     private final List<ConfigModule> mModules;
     @Inject
     protected ActivityLifecycle mActivityLifecycle;
+
     private Application mApplication;
     private AppComponent mAppComponent;
     private List<Lifecycle> mLifecycles = new ArrayList<>();

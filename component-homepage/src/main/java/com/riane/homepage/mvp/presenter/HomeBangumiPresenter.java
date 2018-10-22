@@ -1,11 +1,13 @@
 package com.riane.homepage.mvp.presenter;
 
 import com.riane.basiclib.base.CommonSubscriber;
+import com.riane.basiclib.base.entity.ResultListResponse;
 import com.riane.basiclib.base.entity.ResultObjectResponse;
 import com.riane.basiclib.base.mvp.BasePresenter;
 import com.riane.basiclib.di.scope.FragmentScope;
 import com.riane.basiclib.utils.RxUtil;
 import com.riane.homepage.mvp.contract.IHomeBangumiContract;
+import com.riane.homepage.mvp.model.entity.BangumiRecommendFallBean;
 import com.riane.homepage.mvp.model.entity.HomeBangumiBean;
 import com.riane.homepage.mvp.model.entity.Item;
 import com.riane.homepage.mvp.model.entity.Items;
@@ -46,7 +48,6 @@ public class HomeBangumiPresenter extends BasePresenter<IHomeBangumiContract.Mod
                                 items.add(new Item(Item.BANGUMI_RECOMMENDDETAIL, recommendBean));
                             }
                             items.add(new Item(Item.BANGUMI_RECOMMENDFOOT, null));
-                            items.add(new Item(Item.BANGUMI_RECOMMENDHEAD, "编辑推荐"));
                             return items;
                         }
                     })
@@ -71,5 +72,45 @@ public class HomeBangumiPresenter extends BasePresenter<IHomeBangumiContract.Mod
                         }
                     })
                     );
+    }
+
+    public void getBangumiFall(final long cursor){
+        addSubscribe(mModel.getBangumiFallList(cursor)
+                .compose(RxUtil.<ResultListResponse<BangumiRecommendFallBean>>rxSchedulerHelper())
+                .map(new Function<ResultListResponse<BangumiRecommendFallBean>, List<Item>>() {
+
+                    @Override
+                    public List<Item> apply(ResultListResponse<BangumiRecommendFallBean> bangumiRecommendFallBeanResultListResponse) throws Exception {
+                        List<Item> items = new ArrayList<>();
+                        if (cursor == 0L){
+                            items.add(new Item(Item.BANGUMI_RECOMMENDHEAD, "编辑推荐"));
+                        }
+                        for (BangumiRecommendFallBean bangumiRecommendFallBean: bangumiRecommendFallBeanResultListResponse.getResult()){
+                            items.add(new Item(Item.BANGUMI_INDEX_FALL, bangumiRecommendFallBean));
+                        }
+                        return items;
+                    }
+                })
+                .subscribeWith(new CommonSubscriber<List<Item>>(mView){
+                    @Override
+                    public void onNext(List<Item> bangumiRecommendFallBeans) {
+                        super.onNext(bangumiRecommendFallBeans);
+                        mView.showBangumiFallList(bangumiRecommendFallBeans);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        mView.onLoadMoreFail();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
+                    }
+                })
+                
+        );
+        
     }
 }

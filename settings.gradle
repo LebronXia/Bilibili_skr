@@ -7,4 +7,4 @@ include ':router'
 include ':basiclib',':basicres'
 
 //业务模块
-include ':component-homepage'
+include ':component-homepage', ':component-channel'

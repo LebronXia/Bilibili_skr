@@ -52,16 +52,16 @@ public class HomePageFragment extends SimpleFragment{
 
     @Override
     protected void initData() {
-        setToolBar(mToolbar, "");
+        setToolBar(mToolbar, "", false, false);
+        setHasOptionsMenu(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
         RecommentFragment recommentFragment = new RecommentFragment();
         mFragments.add(recommentFragment);
 
         BangumiFragment bangumiFragment = new BangumiFragment();
         mFragments.add(bangumiFragment);
 
-        mHomepagePageAdapter = new HomepagePageAdapter(getFragmentManager(), mFragments);
+        mHomepagePageAdapter = new HomepagePageAdapter(getChildFragmentManager(), mFragments);
         mViewPager.setAdapter(mHomepagePageAdapter);
         mViewPager.setOffscreenPageLimit(1);
         mTabLayout.setupWithViewPager(mViewPager);
@@ -70,6 +70,7 @@ public class HomePageFragment extends SimpleFragment{
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
         inflater.inflate(R.menu.homepage_main, menu);
     }
 

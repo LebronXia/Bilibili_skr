@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.riane.channel">
+
+    <application
+        android:label="@string/channel_module_name"
+        tools:replace="android:label">
+
+        <meta-data
+            android:name="com.riane.channel.base.ChannelConfig"
+            android:value="ConfigModule"/>
+    </application>
+
+</manifest>

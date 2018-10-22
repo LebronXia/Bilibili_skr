@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/basiclib/basiclib.iml" filepath="$PROJECT_DIR$/basiclib/basiclib.iml" />
       <module fileurl="file://$PROJECT_DIR$/basicres/basicres.iml" filepath="$PROJECT_DIR$/basicres/basicres.iml" />
+      <module fileurl="file://$PROJECT_DIR$/component-channel/component-channel.iml" filepath="$PROJECT_DIR$/component-channel/component-channel.iml" />
       <module fileurl="file://$PROJECT_DIR$/component-homepage/component-homepage.iml" filepath="$PROJECT_DIR$/component-homepage/component-homepage.iml" />
       <module fileurl="file://$PROJECT_DIR$/router/router.iml" filepath="$PROJECT_DIR$/router/router.iml" />
     </modules>

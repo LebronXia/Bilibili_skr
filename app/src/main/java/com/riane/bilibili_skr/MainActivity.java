@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity {
             loadMultipleRootFragment(R.id.gl_contentContainer,
                     0,
                     getTargetFragment(RouterConstans.PATH_HOMEPAGE_MAIN),
-                    getTargetFragment(RouterConstans.PATH_HOMEPAGE_MAIN),
+                    getTargetFragment(RouterConstans.PATH_CHANNEL),
                     getTargetFragment(RouterConstans.PATH_HOMEPAGE_MAIN),
                     getTargetFragment(RouterConstans.PATH_HOMEPAGE_MAIN));
 
@@ -58,9 +58,13 @@ public class MainActivity extends BaseActivity {
                     case R.id.nav_home:
                         showFragment = RouterConstans.PATH_HOMEPAGE_MAIN;
                         break;
+                    case R.id.nav_category:
+                        showFragment = RouterConstans.PATH_CHANNEL;
+                        break;
                 }
                 showHideFragment(getTargetFragment(showFragment),
                         getTargetFragment(hideFragment));
+                hideFragment = showFragment;
             }
         });
     }

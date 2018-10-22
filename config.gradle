@@ -11,7 +11,8 @@ ext {
 
     //合并到主程序运行的组件
     merge = [
-           // "homepage"
+            "homepage",
+            "channel"
     ]
 
     def dependVersion = [

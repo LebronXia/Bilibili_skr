@@ -93,6 +93,7 @@ ext {
             "toast"                     : "com.github.GrenderG:Toasty:1.2.8",
             "bottom-bar"                : "com.roughike:bottom-bar:2.3.1",
             "mz-banner"                 : "com.github.pinguo-zhouwei:MZBannerView:v2.0.1",
+            "circleimageview"           : "de.hdodenhof:circleimageview:2.2.0",
             //富文本
             "richtext"                  : "com.ms-square:expandableTextView:0.1.4",
             "expandableTextView"        : "com.ms-square:expandableTextView:0.1.4",

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimary"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="185dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="@dimen/margin_16"
+        android:src="@drawable/bili_default_avatar"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:text="@string/nav_login"
+        android:textSize="@dimen/text_size_normal"
+        android:textColor="@color/_text__white"
+        android:layout_below="@+id/iv_avatar"
+        android:layout_alignLeft="@+id/iv_avatar"
+        android:fitsSystemWindows="false"
+        />
+
+</RelativeLayout>

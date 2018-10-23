@@ -25,7 +25,7 @@ import butterknife.BindView;
 /**
  * Created by zhengxiaobo on 2018/10/22.
  */
-@Route(path = RouterConstans.PATH_CHANNEL)
+@Route(path = RouterConstans.PATH_CHANNEL_MAIN)
 public class ChannelFragment extends BaseFragment<ChannelMainPresenter> implements IChannelMainContract.View{
 
     @BindView(R2.id.main_toolbar)

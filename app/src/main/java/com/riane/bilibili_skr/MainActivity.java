@@ -1,12 +1,19 @@
 package com.riane.bilibili_skr;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.jaeger.library.StatusBarUtil;
 import com.riane.basiclib.base.BaseActivity;
 import com.riane.basiclib.di.component.AppComponent;
+import com.riane.bilibili_skr.mvp.ui.fragment.MainFragment;
 import com.riane.router.RouterConstans;
 import com.riane.router.RouterUtils;
 import com.roughike.bottombar.BottomBar;
@@ -19,15 +26,14 @@ import me.yokeyword.fragmentation.SupportFragment;
 
 public class MainActivity extends BaseActivity {
 
-    @BindView(R.id.view_enterance_bar)
-    BottomBar bottomBar;
-    @BindView(R.id.gl_contentContainer)
-    FrameLayout mianContent;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
+    @BindView(R.id.navigation_view)
+    NavigationView mNavigationView;
+    @BindView(R.id.mian_container)
+    FrameLayout mian_container;
 
-    //存放Fragemnt
-    HashMap<String, Class<? extends SupportFragment>> loadFragments = new HashMap<>();
-    private String hideFragment= RouterConstans.PATH_HOMEPAGE_MAIN;
-    private String showFragment = RouterConstans.PATH_HOMEPAGE_MAIN;
+    private MainFragment mMainFragment;
 
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
@@ -41,50 +47,37 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        if (loadFragments.get(RouterConstans.PATH_HOMEPAGE_MAIN) == null){
-            loadMultipleRootFragment(R.id.gl_contentContainer,
-                    0,
-                    getTargetFragment(RouterConstans.PATH_HOMEPAGE_MAIN),
-                    getTargetFragment(RouterConstans.PATH_CHANNEL),
-                    getTargetFragment(RouterConstans.PATH_HOMEPAGE_MAIN),
-                    getTargetFragment(RouterConstans.PATH_HOMEPAGE_MAIN));
-
-        }
-
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+        mMainFragment = new MainFragment();
+        loadRootFragment(R.id.mian_container, mMainFragment);
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onTabSelected(int tabId) {
-                switch (tabId){
-                    case R.id.nav_home:
-                        showFragment = RouterConstans.PATH_HOMEPAGE_MAIN;
-                        break;
-                    case R.id.nav_category:
-                        showFragment = RouterConstans.PATH_CHANNEL;
-                        break;
-                }
-                showHideFragment(getTargetFragment(showFragment),
-                        getTargetFragment(hideFragment));
-                hideFragment = showFragment;
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                return true;
             }
         });
     }
 
-    /**
-     * 根据定义的router地址取出相对应的Fragment
-     * @param path
-     * @return
-     */
-    private SupportFragment getTargetFragment(String path){
-        //获取栈内Fragment对象
-        if (loadFragments.get(path) != null && findFragment(loadFragments.get(path)) != null){
-            return findFragment(loadFragments.get(path));
+    @Override
+    public void onBackPressedSupport() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            SupportFragment fragment = (SupportFragment) (RouterUtils.getInstance().build(path).navigation());
-            if (fragment == null){
-                showMsg("空页面");
-            }
-            loadFragments.put(path, fragment.getClass());
-            return fragment;
+            //exitApp();
         }
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+            } else {
+                //exitApp();
+            }
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

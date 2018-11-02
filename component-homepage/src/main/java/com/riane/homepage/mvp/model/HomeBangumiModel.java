@@ -1,5 +1,6 @@
 package com.riane.homepage.mvp.model;
 
+import com.riane.basiclib.base.entity.DataObjectResponse;
 import com.riane.basiclib.base.entity.ResultListResponse;
 import com.riane.basiclib.base.entity.ResultObjectResponse;
 import com.riane.basiclib.base.mvp.BaseModel;
@@ -15,6 +16,7 @@ import com.riane.homepage.mvp.model.entity.HomeBangumiBean;
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
+import retrofit2.http.Query;
 
 /**
  * Created by zhengxiaobo on 2018/10/17.
@@ -49,4 +51,6 @@ public class HomeBangumiModel extends BaseModel implements IHomeBangumiContract.
                         DateUtil.getSystemTime())
                 ;
     }
+
+
 }

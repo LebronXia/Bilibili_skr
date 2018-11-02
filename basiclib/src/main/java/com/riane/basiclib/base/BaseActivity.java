@@ -1,6 +1,8 @@
 package com.riane.basiclib.base;
 
 import android.accounts.AbstractAccountAuthenticator;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.riane.basiclib.base.mvp.BasePresenter;
 import com.riane.basiclib.di.component.AppComponent;
@@ -19,7 +21,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends SimpleActivi
     @Override
     protected void onViewCreated() {
         super.onViewCreated();
-
+        setupActivityComponent(mAppComponent);//依赖注入
     }
 
     @Override

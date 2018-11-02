@@ -31,7 +31,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.navigation_view)
     NavigationView mNavigationView;
     @BindView(R.id.mian_container)
-    FrameLayout mian_container;
+    FrameLayout main_container;
 
     private MainFragment mMainFragment;
 

@@ -86,8 +86,6 @@ public abstract class ClientModule {
                 public Response intercept(Chain chain) throws IOException {
                     return chain.proceed(handler.onHttpRequestBefore(chain, chain.request()));
                 }
-
-
             });
 
         Interceptor signInterceptor = new Interceptor() {

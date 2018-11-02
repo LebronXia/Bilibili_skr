@@ -410,4 +410,6 @@
     <color name="transparent">#00000000</color>
     <color name="tab_unselected_color">#AAffffff</color>
     <color name="et_search_bg_live">#E7E7E7</color>
+
+    <color name="window_background">#eaeaea</color>
 </resources>

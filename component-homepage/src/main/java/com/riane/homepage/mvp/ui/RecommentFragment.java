@@ -1,9 +1,11 @@
 package com.riane.homepage.mvp.ui;
 
+import android.app.Activity;
 import android.preference.SwitchPreference;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -19,6 +21,7 @@ import com.riane.homepage.mvp.contract.IHomeRecommendContract;
 import com.riane.homepage.mvp.model.HomeRecommendModel;
 import com.riane.homepage.mvp.model.entity.RecommentIndexBean;
 import com.riane.homepage.mvp.presenter.HomeRecommentPresenter;
+import com.riane.homepage.mvp.ui.activity.VideoDetailActivity;
 import com.riane.homepage.mvp.ui.adapter.RecommentAdapter;
 import com.riane.router.RouterConstans;
 
@@ -69,6 +72,16 @@ public class RecommentFragment extends BaseFragment<HomeRecommentPresenter> impl
     @Override
     protected void initData() {
         mRecommentAdapter = new RecommentAdapter(mIndexBeanList);
+        mRecommentAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener(){
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (adapter.getItemViewType(position) == RecommentIndexBean.INDEX){
+                    RecommentIndexBean item = (RecommentIndexBean) adapter.getItem(position);
+                    VideoDetailActivity.startActivity((Activity) mContext, Integer.valueOf(item.getParam()), item.getCover());
+                }
+            }
+        });
+
         mRcvRecommend.setAdapter(mRecommentAdapter);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), SPAN_COUNT);
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {

@@ -113,4 +113,6 @@ public class HomeBangumiPresenter extends BasePresenter<IHomeBangumiContract.Mod
         );
         
     }
+
+
 }

@@ -199,7 +199,7 @@ public class CommonApplicationLike implements IApplicationLike{
      * 安装leakCanary检测内存泄露
      */
     protected void installLeakCanary() {
-        this.mRefWatcher = BuildConfig.DEBUG ? LeakCanary.install(mApplication) : RefWatcher.DISABLED;
+        //this.mRefWatcher = BuildConfig.DEBUG ? LeakCanary.install(mApplication) : RefWatcher.DISABLED;
     }
 
 

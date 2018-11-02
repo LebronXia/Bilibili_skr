@@ -8,27 +8,23 @@ import com.riane.basiclib.base.mvp.IView;
 import com.riane.homepage.mvp.model.entity.BangumiRecommendFallBean;
 import com.riane.homepage.mvp.model.entity.HomeBangumiBean;
 import com.riane.homepage.mvp.model.entity.Item;
+import com.riane.homepage.mvp.model.entity.VideoDetailInfo;
 
 import java.util.List;
 
 import io.reactivex.Flowable;
 
 /**
- * Created by zhengxiaobo on 2018/10/17.
+ * Created by zhengxiaobo on 2018/10/31.
  */
 
-public interface IHomeBangumiContract {
+public interface IVideoDetailContract {
     interface View extends IView {
-        void showBangumiList(List<Item> bangumiList);
-
-        void showBangumiFallList(List<Item> bangumiFallList);
-
-        void onLoadMoreFail();
+        void showVideoDetail(Object videoDetail);
     }
 
     interface Model extends IModel {
-        Flowable<ResultObjectResponse<HomeBangumiBean>> getBangumiList();
 
-        Flowable<ResultListResponse<BangumiRecommendFallBean>> getBangumiFallList(long cursor);
+        Flowable<DataObjectResponse<VideoDetailInfo>> getVideoDetail(int aid);
     }
 }

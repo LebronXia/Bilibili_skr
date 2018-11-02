@@ -58,6 +58,7 @@ public class RecommentAdapter extends BaseMultiItemQuickAdapter<RecommentIndexBe
                 helper.setText(R.id.tv_title, item.getTitle());
                 helper.setText(R.id.tv_name, item.getTag() == null ? "" : item.getTag().getTag_name());
                 ImageUtil.load(mContext, item.getCover(), (ImageView) helper.getView(R.id.imageview));
+
                 break;
         }
     }

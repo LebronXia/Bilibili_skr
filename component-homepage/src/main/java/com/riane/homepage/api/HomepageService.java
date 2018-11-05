@@ -95,4 +95,6 @@ public interface  HomepageService {
                                                                  @Query("platform") String platform,
                                                                  @Query("ts") String ts);
 
+    //Flowable<>
+
 }

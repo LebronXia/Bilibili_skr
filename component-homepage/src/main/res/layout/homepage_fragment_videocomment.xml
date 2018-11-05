@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:overScrollMode="never"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_10"
+            android:paddingRight="@dimen/padding_10"
+            android:paddingTop="@dimen/margin_normal"
+            android:paddingBottom="@dimen/margin_normal"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_useravator"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/bili_default_avatar"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_toRightOf="@+id/iv_useravator"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_normal"
+                >
+
+                <TextView
+                    android:id="@+id/tv_up_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="老炮电影"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_normal"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_up_fans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="44万粉丝"
+                    android:textColor="@color/_text__white_dark"
+                    android:textSize="@dimen/text_size_normal"
+                    android:layout_marginTop="4dp"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:background="@drawable/btn_pin_solid_bg"
+                android:text="关注"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_normal"
+                android:gravity="center"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_marginLeft="@dimen/margin_10"
+            >
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:lineSpacingExtra="2dp"
+                android:text="XXXXXXXXXXXXXXXXXXXX"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/black"
+                android:layout_toLeftOf="@+id/iv_show_hide"
+                />
+
+            <ImageView
+                android:id="@+id/iv_show_hide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ico_wode_xia"
+                android:paddingLeft="@dimen/padding_10"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingEnd="@dimen/padding_10"
+            android:paddingStart="@dimen/padding_10"
+            android:paddingTop="@dimen/padding_8"
+            android:paddingBottom="@dimen/padding_8"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/width_16"
+                android:layout_height="@dimen/height_16"
+                android:src="@drawable/bangumi_common_ic_video_views"
+                android:tint="@color/black_alpha_45" />
+
+            <TextView
+                android:id="@+id/tv_play_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:textColor="@color/black_alpha50"
+                android:textSize="@dimen/text_size_small" />
+
+            <Space
+                android:layout_width="@dimen/margin_4"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:layout_width="@dimen/width_16"
+                android:layout_height="@dimen/height_16"
+                android:src="@drawable/bangumi_common_ic_video_danmakus"
+                android:tint="@color/black_alpha_45" />
+
+            <TextView
+                android:id="@+id/tv_review_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/black_alpha50"
+                />
+
+        </LinearLayout>
+
+        <com.ms.square.android.expandabletextview.ExpandableTextView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_detail_description"
+            expandableTextView:animDuration="200"
+            expandableTextView:maxCollapsedLines="3"
+            >
+
+            <TextView
+                android:id="@+id/expandable_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/margin_10"
+                android:paddingStart="@dimen/margin_10"
+                android:textColor="@color/black_alpha50"
+                android:textSize="@dimen/text_size_small"
+                />
+
+            <ImageButton
+                android:id="@id/expand_collapse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_gravity="right|bottom"
+                android:background="@android:color/transparent"
+                android:visibility="gone"
+                />
+
+        </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/gray_light"
+            android:layout_marginTop="@dimen/margin_6"
+            />
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/tags_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_16"
+            android:layout_marginStart="@dimen/margin_16"
+            app:max_select="-1" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:scrollbars="none" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

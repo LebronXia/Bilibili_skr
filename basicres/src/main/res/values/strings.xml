@@ -5,4 +5,8 @@
     <string name="msg_error_unknown">发生了些意想不到的错误\u03a3( \u00b0 \u25b3 \u00b0)</string>
     <string name="msg_error_retry">电波无法到达哟\u03a3( \u00b0 \u25b3 \u00b0)</string>
     <string name="msg_error_too_fast">操作过于频繁，请稍后再试</string>
+
+    <string name="msg_error_url_null">大脑一片空白(@\ufe4f@)~</string>
+    <string name="msg_error_data_null">数据加载失败(\u256f\ufe4f\u2570)</string>
+    <string name="msg_error_check_permission">权限不足！请检查应用权限配置</string>
 </resources>

@@ -5,6 +5,7 @@ import com.riane.basiclib.base.entity.DataObjectResponse;
 import com.riane.basiclib.base.mvp.BasePresenter;
 import com.riane.basiclib.di.scope.ActivityScope;
 import com.riane.basiclib.utils.RxUtil;
+import com.riane.homepage.R;
 import com.riane.homepage.mvp.contract.IVideoDetailContract;
 import com.riane.homepage.mvp.model.entity.VideoDetailInfo;
 
@@ -22,6 +23,10 @@ public class VideoDetailPresenter extends BasePresenter<IVideoDetailContract.Mod
     }
 
     public void getVideoDetail(int id){
+//        if (id == -1){
+//            mView.showError(R.string.msg_error_url_null);
+//            return;
+//        }
         addSubscribe(mModel.getVideoDetail(id)
                 .compose(RxUtil.<DataObjectResponse<VideoDetailInfo>>rxSchedulerHelper())
                 .map(objectResultObjectResponse ->
@@ -32,16 +37,20 @@ public class VideoDetailPresenter extends BasePresenter<IVideoDetailContract.Mod
                     @Override
                     public void onNext(VideoDetailInfo o) {
                         super.onNext(o);
+                        mView.showVideoDetail(o);
+                        mView.showPageContent();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
+                        mView.showPageError();
                     }
 
                     @Override
                     public void onComplete() {
                         super.onComplete();
+                        mView.hideLoading();
                     }
                 }
         ));

@@ -7,6 +7,7 @@ import com.riane.homepage.di.module.HomeBangumiModule;
 import com.riane.homepage.di.module.VideoDetailModule;
 import com.riane.homepage.mvp.ui.activity.VideoDetailActivity;
 import com.riane.homepage.mvp.ui.fragment.BangumiFragment;
+import com.riane.homepage.mvp.ui.fragment.VideoIntroductionFragment;
 
 import dagger.Component;
 
@@ -19,5 +20,7 @@ import dagger.Component;
 public interface VideoDetailComponent {
 
     void inject(VideoDetailActivity activity);
+
+    void inject(VideoIntroductionFragment fragment);
 
 }

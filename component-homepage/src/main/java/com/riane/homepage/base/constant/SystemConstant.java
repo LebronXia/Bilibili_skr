@@ -7,4 +7,5 @@ package com.riane.homepage.base.constant;
 public class SystemConstant {
 
     public static final String[] HOMEPAGE_TAB_TITLE = {"推荐", "追番"};
+    public static final String[] VIDEO_DETAIL_TITLE = {"简介", "评论"};
 }

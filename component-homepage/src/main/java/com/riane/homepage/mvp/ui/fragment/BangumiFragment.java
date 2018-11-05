@@ -14,6 +14,7 @@ import com.riane.homepage.di.component.DaggerHomeBangumiComponent;
 import com.riane.homepage.di.module.HomeBangumiModule;
 import com.riane.homepage.mvp.contract.IHomeBangumiContract;
 import com.riane.homepage.mvp.model.entity.BangumiRecommendFallBean;
+import com.riane.homepage.mvp.model.entity.HomeBangumiBean;
 import com.riane.homepage.mvp.model.entity.Item;
 import com.riane.homepage.mvp.presenter.HomeBangumiPresenter;
 import com.riane.homepage.mvp.ui.adapter.BangumiAdapter;
@@ -89,7 +90,6 @@ public class BangumiFragment extends BaseFragment<HomeBangumiPresenter> implemen
             public void onRefresh() {
                 cursor = 0;
                 mPresenter.getBangumiData();
-                mPresenter.getBangumiFall(cursor);
             }
         });
         mBangumiAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
@@ -100,20 +100,24 @@ public class BangumiFragment extends BaseFragment<HomeBangumiPresenter> implemen
                     mPresenter.getBangumiFall(cursor);
                 } else {
                     Item indexBean = mBangumiAdapter.getItem(mBangumiAdapter.getItemCount() - 2);
-                    if (indexBean.getData() instanceof BangumiRecommendFallBean)
-                    mPresenter.getBangumiFall(((BangumiRecommendFallBean)indexBean.getData()).getCursor());
+                    if (indexBean.getData() instanceof BangumiRecommendFallBean){
+                        mPresenter.getBangumiFall(((BangumiRecommendFallBean)indexBean.getData()).getCursor());
+                    } else if (indexBean.getData() instanceof HomeBangumiBean){
+                        mPresenter.getBangumiFall(0);
+                    }
                 }
             }
         });
         setSwipeRefreshLayout(mRefresh);
         mPresenter.getBangumiData();
-        mPresenter.getBangumiFall(cursor);
+        //mPresenter.getBangumiFall(cursor);
     }
 
     @Override
     public void showBangumiList(List<Item> bangumiList) {
         mItems = bangumiList;
         mBangumiAdapter.setNewData(mItems);
+        mPresenter.getBangumiFall(cursor);
 
     }
 

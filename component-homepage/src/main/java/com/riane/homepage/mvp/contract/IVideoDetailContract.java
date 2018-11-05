@@ -20,7 +20,7 @@ import io.reactivex.Flowable;
 
 public interface IVideoDetailContract {
     interface View extends IView {
-        void showVideoDetail(Object videoDetail);
+        void showVideoDetail(VideoDetailInfo videoDetail);
     }
 
     interface Model extends IModel {

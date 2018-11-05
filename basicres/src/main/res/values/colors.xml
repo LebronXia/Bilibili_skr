@@ -412,4 +412,8 @@
     <color name="et_search_bg_live">#E7E7E7</color>
 
     <color name="window_background">#eaeaea</color>
+    <color name="font_normal">#555555</color>
+    <color name="font_gray">#656565</color>
+    <color name="black_alpha_45">#71000000</color>
+    <color name="item_background_gray">#44999999</color>
 </resources>

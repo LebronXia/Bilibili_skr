@@ -153,10 +153,10 @@ public abstract class ClientModule {
      */
     @Singleton
     @Provides
-    static RxCache provideRxCache(@Named("RxCacheDirectory") File cacheDirectory) {
+    static RxCache provideRxCache(@Named("RxCacheDirectory") File cacheDirectory, Gson gson) {
         return new RxCache
                 .Builder()
-                .persistence(cacheDirectory, new GsonSpeaker());
+                .persistence(cacheDirectory, new GsonSpeaker(gson));
     }
 
     /**

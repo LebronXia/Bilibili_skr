@@ -10,6 +10,8 @@ import com.riane.basiclib.BuildConfig;
 import com.riane.basiclib.R;
 import com.riane.basiclib.base.widget.loadsir.EmptyCallback;
 import com.riane.basiclib.base.widget.loadsir.EmptyCollectionCallback;
+import com.riane.basiclib.base.widget.loadsir.EmptyFaviourCallback;
+import com.riane.basiclib.base.widget.loadsir.EmptyHistoryCallback;
 import com.riane.basiclib.base.widget.loadsir.LoadingCallback;
 import com.riane.basiclib.base.widget.loadsir.PlaceholderCallback;
 import com.riane.basiclib.base.widget.loadsir.RetryCallback;
@@ -102,6 +104,8 @@ public class CommonApplicationLike implements IApplicationLike{
                 .addCallback(new EmptyCollectionCallback())
                 .addCallback(new PlaceholderCallback())
                 .addCallback(new RetryCallback())
+                .addCallback(new EmptyHistoryCallback())
+                .addCallback(new EmptyFaviourCallback())
                 .setDefaultCallback(LoadingCallback.class)
                 .commit();
 

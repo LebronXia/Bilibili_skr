@@ -27,8 +27,8 @@ public interface IHomeBangumiContract {
     }
 
     interface Model extends IModel {
-        Flowable<ResultObjectResponse<HomeBangumiBean>> getBangumiList();
+        Flowable<HomeBangumiBean> getBangumiList();
 
-        Flowable<ResultListResponse<BangumiRecommendFallBean>> getBangumiFallList(long cursor);
+        Flowable<ResultObjectResponse<List<BangumiRecommendFallBean>>> getBangumiFallList(int page, long cursor);
     }
 }

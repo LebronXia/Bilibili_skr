@@ -6,14 +6,13 @@ import com.riane.basiclib.di.scope.ActivityScope;
 import com.riane.basiclib.http.api.ApiHelper;
 import com.riane.basiclib.integration.IRepositoryManager;
 import com.riane.basiclib.utils.DateUtil;
-import com.riane.homepage.api.HomepageService;
+import com.riane.homepage.api.net.HomepageService;
 import com.riane.homepage.mvp.contract.IVideoDetailContract;
 import com.riane.homepage.mvp.model.entity.VideoDetailInfo;
 
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
-import retrofit2.http.Query;
 
 /**
  * Created by zhengxiaobo on 2018/10/31.

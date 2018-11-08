@@ -32,19 +32,19 @@ public class HomeBangumiPresenter extends BasePresenter<IHomeBangumiContract.Mod
 
     public void getBangumiData(){
         addSubscribe(mModel.getBangumiList()
-                    .compose(RxUtil.<ResultObjectResponse<HomeBangumiBean>>rxSchedulerHelper())
-                    .map(new Function<ResultObjectResponse<HomeBangumiBean>,  List<Item>>() {
+                    .compose(RxUtil.<HomeBangumiBean>rxSchedulerHelper())
+                    .map(new Function<HomeBangumiBean,  List<Item>>() {
                         @Override
-                        public  List<Item> apply(ResultObjectResponse<HomeBangumiBean> objectResultObjectResponse) throws Exception {
+                        public  List<Item> apply(HomeBangumiBean homeBangumiBean) throws Exception {
                            List<Item> items = new ArrayList<>();
                            items.add(new Item(Item.BANGUMI_TOPHOME, null));
                            items.add(new Item(Item.BANGUMI_RECOMMENDHEAD, "番剧推荐"));
-                           for (HomeBangumiBean.RecommendBean recommendBean : objectResultObjectResponse.getResult().getRecommend_jp().getRecommend()){
+                           for (HomeBangumiBean.RecommendBean recommendBean : homeBangumiBean.getRecommend_jp().getRecommend()){
                                items.add(new Item(Item.BANGUMI_RECOMMENDDETAIL, recommendBean));
                            }
                            items.add(new Item(Item.BANGUMI_RECOMMENDFOOT, null));
                             items.add(new Item(Item.BANGUMI_RECOMMENDHEAD, "国产动画推荐"));
-                            for (HomeBangumiBean.RecommendBean recommendBean : objectResultObjectResponse.getResult().getRecommend_cn().getRecommend()){
+                            for (HomeBangumiBean.RecommendBean recommendBean : homeBangumiBean.getRecommend_cn().getRecommend()){
                                 items.add(new Item(Item.BANGUMI_RECOMMENDDETAIL, recommendBean));
                             }
                             items.add(new Item(Item.BANGUMI_RECOMMENDFOOT, null));
@@ -74,13 +74,13 @@ public class HomeBangumiPresenter extends BasePresenter<IHomeBangumiContract.Mod
                     );
     }
 
-    public void getBangumiFall(final long cursor){
-        addSubscribe(mModel.getBangumiFallList(cursor)
-                .compose(RxUtil.<ResultListResponse<BangumiRecommendFallBean>>rxSchedulerHelper())
-                .map(new Function<ResultListResponse<BangumiRecommendFallBean>, List<Item>>() {
+    public void getBangumiFall(int page, final long cursor){
+        addSubscribe(mModel.getBangumiFallList(page, cursor)
+                .compose(RxUtil.<ResultObjectResponse<List<BangumiRecommendFallBean>>>rxSchedulerHelper())
+                .map(new Function<ResultObjectResponse<List<BangumiRecommendFallBean>>, List<Item>>() {
 
                     @Override
-                    public List<Item> apply(ResultListResponse<BangumiRecommendFallBean> bangumiRecommendFallBeanResultListResponse) throws Exception {
+                    public List<Item> apply(ResultObjectResponse<List<BangumiRecommendFallBean>> bangumiRecommendFallBeanResultListResponse) throws Exception {
                         List<Item> items = new ArrayList<>();
                         if (cursor == 0L){
                             items.add(new Item(Item.BANGUMI_RECOMMENDHEAD, "编辑推荐"));

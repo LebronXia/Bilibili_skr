@@ -40,6 +40,7 @@ public class BangumiFragment extends BaseFragment<HomeBangumiPresenter> implemen
     private static final int SPAN_COUNT = 3;
     private BangumiAdapter mBangumiAdapter;
     private List<Item> mItems;
+    private int page = 0;
 
     @Override
     public void setFragmentComponent(AppComponent fragmentComponent) {
@@ -57,6 +58,11 @@ public class BangumiFragment extends BaseFragment<HomeBangumiPresenter> implemen
     @Override
     protected boolean useLoadSir() {
         return true;
+    }
+
+    @Override
+    protected void onPageRetry(android.view.View v) {
+        mPresenter.getBangumiData();
     }
 
     @Override
@@ -89,6 +95,7 @@ public class BangumiFragment extends BaseFragment<HomeBangumiPresenter> implemen
             @Override
             public void onRefresh() {
                 cursor = 0;
+                page = 0;
                 mPresenter.getBangumiData();
             }
         });
@@ -97,13 +104,14 @@ public class BangumiFragment extends BaseFragment<HomeBangumiPresenter> implemen
             public void onLoadMoreRequested() {
                 int amount = mBangumiAdapter.getItemCount();
                 if (cursor == 0L){
-                    mPresenter.getBangumiFall(cursor);
+                    mPresenter.getBangumiFall(page, cursor);
                 } else {
+                    page++;
                     Item indexBean = mBangumiAdapter.getItem(mBangumiAdapter.getItemCount() - 2);
                     if (indexBean.getData() instanceof BangumiRecommendFallBean){
-                        mPresenter.getBangumiFall(((BangumiRecommendFallBean)indexBean.getData()).getCursor());
+                        mPresenter.getBangumiFall(page, ((BangumiRecommendFallBean)indexBean.getData()).getCursor());
                     } else if (indexBean.getData() instanceof HomeBangumiBean){
-                        mPresenter.getBangumiFall(0);
+                        mPresenter.getBangumiFall(0, 0);
                     }
                 }
             }
@@ -117,7 +125,7 @@ public class BangumiFragment extends BaseFragment<HomeBangumiPresenter> implemen
     public void showBangumiList(List<Item> bangumiList) {
         mItems = bangumiList;
         mBangumiAdapter.setNewData(mItems);
-        mPresenter.getBangumiFall(cursor);
+        mPresenter.getBangumiFall(page, cursor);
 
     }
 

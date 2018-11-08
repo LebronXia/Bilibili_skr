@@ -1,5 +1,6 @@
 package com.riane.homepage.mvp.ui;
 
+import android.app.Activity;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by zhengxiaobo on 2018/10/14.
@@ -65,6 +67,14 @@ public class HomePageFragment extends SimpleFragment{
         mViewPager.setAdapter(mHomepagePageAdapter);
         mViewPager.setOffscreenPageLimit(1);
         mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    @OnClick(R2.id.toolbar_left_layout)
+    void toggleDrawer() {
+//        Activity activity = getActivity();
+//        if (activity instanceof MainActivity) {
+//            ((MainActivity) activity).toggleDrawer();
+//        }
     }
 
     @Override

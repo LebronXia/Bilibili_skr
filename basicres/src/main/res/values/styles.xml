@@ -51,4 +51,9 @@
         <item name="android:background">?attr/colorPrimary</item>
         <item name="popupTheme">@style/AppTheme.PopupOverlay</item>
     </style>
+
+    <!--ToolBar TextSize style-->
+    <style name="ToolBar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

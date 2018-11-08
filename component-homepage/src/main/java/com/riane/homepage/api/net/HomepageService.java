@@ -1,4 +1,4 @@
-package com.riane.homepage.api;
+package com.riane.homepage.api.net;
 
 import com.riane.basiclib.base.entity.DataListResponse;
 import com.riane.basiclib.base.entity.DataObjectResponse;
@@ -8,6 +8,8 @@ import com.riane.homepage.mvp.model.entity.BangumiRecommendFallBean;
 import com.riane.homepage.mvp.model.entity.HomeBangumiBean;
 import com.riane.homepage.mvp.model.entity.RecommentIndexBean;
 import com.riane.homepage.mvp.model.entity.VideoDetailInfo;
+
+import java.util.List;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
@@ -62,12 +64,12 @@ public interface  HomepageService {
      */
     @Headers("Domain-Name: bangumi")
     @GET("/appindex/follow_index_fall")
-    Flowable<ResultListResponse<BangumiRecommendFallBean>> getBnagumiFall(@Query("appkey") String appkey,
-                                                                          @Query("build") String build,
-                                                                          @Query("cursor") long cursor,
-                                                                          @Query("mobi_app") String mobi_app,
-                                                                          @Query("platform") String platform,
-                                                                          @Query("ts") String ts);
+    Flowable<ResultObjectResponse<List<BangumiRecommendFallBean>>> getBnagumiFall(@Query("appkey") String appkey,
+                                                                                 @Query("build") String build,
+                                                                                 @Query("cursor") long cursor,
+                                                                                 @Query("mobi_app") String mobi_app,
+                                                                                 @Query("platform") String platform,
+                                                                                 @Query("ts") String ts);
 
 
     /**

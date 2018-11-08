@@ -8,7 +8,6 @@
     app:cardCornerRadius="@dimen/index_card_radius"
     app:cardElevation="0dp"
     app:cardPreventCornerOverlap="false"
-    android:layout_margin="8dp"
     >
 
     <com.zhouwei.mzbanner.MZBannerView

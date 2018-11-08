@@ -8,7 +8,8 @@ import com.riane.basiclib.di.module.GlobeConfigModule;
 import com.riane.basiclib.integration.ConfigModule;
 import com.riane.basiclib.integration.IRepositoryManager;
 import com.riane.basiclib.http.api.ApiConstants;
-import com.riane.homepage.api.HomepageService;
+import com.riane.homepage.api.cache.HomepageCacheService;
+import com.riane.homepage.api.net.HomepageService;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class HomepageConfig implements ConfigModule {
     @Override
     public void registerComponents(Context context, IRepositoryManager repositoryManager) {
         repositoryManager.injectRetrofitService(HomepageService.class);
+        repositoryManager.injectCacheService(HomepageCacheService.class);
     }
 
     @Override

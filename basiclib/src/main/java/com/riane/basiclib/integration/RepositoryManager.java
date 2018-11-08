@@ -51,6 +51,7 @@ public class RepositoryManager implements IRepositoryManager {
                 continue;
             }
             mCacheServiceCache.put(service.getName(), mRxCache.using(service));
+            int i = 0;
         }
     }
 //

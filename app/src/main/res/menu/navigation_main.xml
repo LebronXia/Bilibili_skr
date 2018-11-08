@@ -10,19 +10,19 @@
             android:title="@string/nav_home"
             android:checked="true"/>
         <item
-            android:id="@+id/nav_vip"
+            android:id="@+id/nav_history"
             android:icon="@drawable/ic_history_black_24dp"
             android:title="@string/nav_history" />
         <item
-            android:id="@+id/nav_vip_point"
+            android:id="@+id/nav_offline_download"
             android:icon="@drawable/ic_download_grey_24dp"
             android:title="@string/nav_download" />
         <item
-            android:id="@+id/nav_unicom"
+            android:id="@+id/nav_favourite"
             android:icon="@drawable/ic_star_black_24dp"
             android:title="@string/nav_collect" />
         <item
-            android:id="@+id/nav_download"
+            android:id="@+id/nav_watch_later"
             android:icon="@drawable/ic_view_later_24dp"
             android:title="@string/nav_view_later"
             />

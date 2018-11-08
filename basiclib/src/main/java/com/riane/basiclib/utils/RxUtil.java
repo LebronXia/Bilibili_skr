@@ -1,5 +1,8 @@
 package com.riane.basiclib.utils;
 
+import com.riane.basiclib.base.entity.ResultListResponse;
+import com.riane.basiclib.base.entity.ResultObjectResponse;
+import com.riane.basiclib.http.ApiException;
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Completable;
 import io.reactivex.CompletableTransformer;
@@ -9,6 +12,7 @@ import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.FlowableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.functions.Function;
 
 
 public class RxUtil {
@@ -40,27 +44,27 @@ public class RxUtil {
   }
 
   /**
-   * 统一返回结果处理
+   * 统一返回结果处理(结果是result)
    * @param <T>
    * @return
    */
-    /*public static <T> FlowableTransformer<GoldHttpResponse<T>, T> handleGoldResult() {   //compose判断结果
-        return new FlowableTransformer<GoldHttpResponse<T>, T>() {
+    public static <T> FlowableTransformer<ResultObjectResponse<T>, T> handleResultObjectResult() {   //compose判断结果
+        return new FlowableTransformer<ResultObjectResponse<T>, T>() {
             @Override
-            public Flowable<T> apply(Flowable<GoldHttpResponse<T>> httpResponseFlowable) {
-                return httpResponseFlowable.flatMap(new Function<GoldHttpResponse<T>, Flowable<T>>() {
+            public Flowable<T> apply(Flowable<ResultObjectResponse<T>> httpResponseFlowable) {
+                return httpResponseFlowable.flatMap(new Function<ResultObjectResponse<T>, Flowable<T>>() {
                     @Override
-                    public Flowable<T> apply(GoldHttpResponse<T> tGoldHttpResponse) {
-                        if(tGoldHttpResponse.getResults() != null) {
-                            return createData(tGoldHttpResponse.getResults());
+                    public Flowable<T> apply(ResultObjectResponse<T> tGoldHttpResponse) {
+                        if(tGoldHttpResponse.getResult() != null) {
+                            return createData(tGoldHttpResponse.getResult());
                         } else {
-                            return Flowable.error(new ApiException("服务器返回error"));
+                            return Flowable.error(new ApiException(tGoldHttpResponse.getMessage()));
                         }
                     }
                 });
             }
         };
-    }*/
+    }
 
   /**
    * 生成Flowable

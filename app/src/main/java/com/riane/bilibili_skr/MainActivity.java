@@ -5,14 +5,17 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.jaeger.library.StatusBarUtil;
 import com.riane.basiclib.base.BaseActivity;
+import com.riane.basiclib.base.SimpleActivity;
 import com.riane.basiclib.di.component.AppComponent;
 import com.riane.bilibili_skr.mvp.ui.fragment.MainFragment;
 import com.riane.bilibili_skr.mvp.ui.fragment.menu.FavoritesFragment;
@@ -27,8 +30,7 @@ import java.util.HashMap;
 import butterknife.BindView;
 import me.yokeyword.fragmentation.SupportFragment;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener{
-
+public class MainActivity extends SimpleActivity implements NavigationView.OnNavigationItemSelectedListener{
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
     @BindView(R.id.navigation_view)
@@ -36,16 +38,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @BindView(R.id.mian_container)
     FrameLayout main_container;
 
+    ActionBarDrawerToggle toggle;
     private MainFragment mMainFragment;
     private HistoryFragment mHistoryFragment;
     private FavoritesFragment mFavoritesFragment;
     private SupportFragment hideFragment= mMainFragment;
     private SupportFragment showFragment = mMainFragment;
-
-    @Override
-    protected void setupActivityComponent(AppComponent appComponent) {
-
-    }
 
     @Override
     protected int getLayoutId() {
@@ -54,6 +52,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void initData() {
+        //initToolbar();
         initFragments();
         loadMultipleRootFragment(R.id.mian_container,
                 0,
@@ -65,6 +64,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         //loadRootFragment(R.id.mian_container, mMainFragment);
         mNavigationView.setNavigationItemSelectedListener(this);
     }
+
+//    private void initToolbar() {
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//        toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolBar,
+//                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        mDrawerLayout.addDrawerListener(toggle);
+//        toggle.syncState();
+//    }
 
     private void initFragments() {
         mMainFragment = new MainFragment();

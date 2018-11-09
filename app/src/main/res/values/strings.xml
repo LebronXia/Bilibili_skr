@@ -21,4 +21,7 @@
     <string name="nav_account_balance_wallet">B币钱包</string>
     <string name="nav_color_lens">主题选择</string>
     <string name="nav_settings">设置与帮助</string>
+
+    <string name="navigation_drawer_open">打开侧边栏</string>
+    <string name="navigation_drawer_close">关闭侧边栏</string>
 </resources>

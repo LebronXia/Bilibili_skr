@@ -1,7 +1,7 @@
 package com.riane.bilibili_skr.mvp.ui.fragment.menu;
 
+
 import android.app.Activity;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ViewGroup;
@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 
 import com.riane.basiclib.base.BaseFragment;
 import com.riane.basiclib.base.SimpleFragment;
-import com.riane.basiclib.base.widget.loadsir.EmptyCallback;
+import com.riane.basiclib.base.widget.loadsir.EmptyFaviourCallback;
 import com.riane.basiclib.base.widget.loadsir.EmptyHistoryCallback;
 import com.riane.basiclib.di.component.AppComponent;
 import com.riane.bilibili_skr.MainActivity;
@@ -21,15 +21,15 @@ import butterknife.BindView;
  * Created by zhengxiaobo on 2018/11/8.
  */
 
-public class HistoryFragment extends SimpleFragment{
+public class FavoritesFragment extends SimpleFragment{
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-   //@BindView(R.id.layout_content)
+    //@BindView(R.id.layout_content)
     RelativeLayout layoutContent;
 
-    public static HistoryFragment newInstance() {
-        return new HistoryFragment();
+    public static FavoritesFragment newInstance() {
+        return new FavoritesFragment();
     }
 
     @Override
@@ -50,11 +50,8 @@ public class HistoryFragment extends SimpleFragment{
     @Override
     protected void initData() {
         showPageEmpty();
-        //((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
-        mToolbar.setTitle("历史记录");
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        //使左上角图标是否显示
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        mToolbar.setTitle("我的收藏");
+        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.drawable.ic_navigation_drawer);
         mToolbar.setNavigationOnClickListener(v -> {
             Activity activity1 = getActivity();
@@ -73,7 +70,7 @@ public class HistoryFragment extends SimpleFragment{
     @Override
     public void showPageEmpty() {
         if (mLoadService != null) {
-            mLoadService.showCallback(EmptyHistoryCallback.class);
+            mLoadService.showCallback(EmptyFaviourCallback.class);
         }
     }
 }

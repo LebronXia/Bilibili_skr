@@ -11,6 +11,8 @@
         <item name="colorControlNormal">@android:color/white</item>
         <item name="android:windowBackground">@color/grey50</item>
         <item name="android:windowAnimationStyle">@style/AppWindowAnim</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

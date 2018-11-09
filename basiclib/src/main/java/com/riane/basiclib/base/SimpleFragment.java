@@ -60,14 +60,20 @@ public abstract class SimpleFragment extends SupportFragment implements IView{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(getLayoutId(), null);
+        mUnBinder = ButterKnife.bind(this, mView);
+
         if (useLoadSir()) {
-            mLoadService = LoadSir.getDefault().register(registerTarget(), new Callback.OnReloadListener() {
-                @Override
-                public void onReload(View v) {
-                    onPageRetry(v);
-                }
-            });
-            return mLoadService.getLoadLayout();
+            if (keepTitle()){
+                return mView;
+            } else {
+                mLoadService = LoadSir.getDefault().register(registerTarget(), new Callback.OnReloadListener() {
+                    @Override
+                    public void onReload(View v) {
+                        onPageRetry(v);
+                    }
+                });
+                return mLoadService.getLoadLayout();
+            }
         } else {
             return mView;
         }
@@ -76,8 +82,15 @@ public abstract class SimpleFragment extends SupportFragment implements IView{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mUnBinder = ButterKnife.bind(this, view);
-    }
+        if (keepTitle()){
+            mLoadService = LoadSir.getDefault().register(registerTarget(), new Callback.OnReloadListener() {
+                @Override
+                public void onReload(View v) {
+                    onPageRetry(v);
+                }
+            });
+        }
+     }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
@@ -155,6 +168,13 @@ public abstract class SimpleFragment extends SupportFragment implements IView{
      * 是否使用loadsir，默认不使用
      */
     protected boolean useLoadSir() {
+        return false;
+    }
+
+    /**
+     * 是否保持Toolbar，默认不使用
+     */
+    protected boolean keepTitle(){
         return false;
     }
 

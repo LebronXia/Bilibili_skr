@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="homepage_app_bar_height">226dp</dimen>
+    <dimen name="homepage_fab_margin">16dp</dimen>
+    <dimen name="homepage_text_margin">16dp</dimen>
+    <dimen name="homepage_head_image_bg_height">128dp</dimen>
+    <dimen name="homePage_tab_layout_height">40dp</dimen>
+</resources>

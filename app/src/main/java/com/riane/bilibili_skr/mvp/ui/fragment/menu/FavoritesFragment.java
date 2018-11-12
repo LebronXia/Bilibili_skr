@@ -52,6 +52,9 @@ public class FavoritesFragment extends SimpleFragment{
         showPageEmpty();
         mToolbar.setTitle("我的收藏");
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        //使左上角图标是否显示
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         mToolbar.setNavigationIcon(R.drawable.ic_navigation_drawer);
         mToolbar.setNavigationOnClickListener(v -> {
             Activity activity1 = getActivity();

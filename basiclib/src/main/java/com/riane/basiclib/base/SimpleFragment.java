@@ -105,36 +105,49 @@ public abstract class SimpleFragment extends SupportFragment implements IView{
         mUnBinder.unbind();
     }
 
-    protected void setToolBar(Toolbar toolbar, String title, boolean isCenter, boolean isBack) {
-        toolbar.setTitle("");
+    protected void setToolBar(Toolbar toolbar, String title) {
+        toolbar.setTitle(title);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        if (isCenter){
-            toolbar.findViewById(R.id.toolbar_left_layout).setVisibility(View.GONE);
-            ((TextView)toolbar.findViewById(R.id.tv_title)).setVisibility(View.VISIBLE);
-            ((TextView)toolbar.findViewById(R.id.tv_title)).setText(title);
-        } else {
-            toolbar.findViewById(R.id.toolbar_left_layout).setVisibility(View.VISIBLE);
-            ((TextView)toolbar.findViewById(R.id.tv_title)).setVisibility(View.GONE);
-            ((TextView)toolbar.findViewById(R.id.tv_title)).setText(title);
-        }
-
-        if (isBack){
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            //使左上角图标是否显示
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onBackPressedSupport();
-                }
-            });
-        } else {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            //使左上角图标是否显示
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
-
-        }
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressedSupport();
+            }
+        });
     }
+
+//    protected void setToolBar(Toolbar toolbar, String title, boolean isCenter, boolean isBack) {
+//        toolbar.setTitle("");
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+//        if (isCenter){
+//            toolbar.findViewById(R.id.toolbar_left_layout).setVisibility(View.GONE);
+//            ((TextView)toolbar.findViewById(R.id.tv_title)).setVisibility(View.VISIBLE);
+//            ((TextView)toolbar.findViewById(R.id.tv_title)).setText(title);
+//        } else {
+//            toolbar.findViewById(R.id.toolbar_left_layout).setVisibility(View.VISIBLE);
+//            ((TextView)toolbar.findViewById(R.id.tv_title)).setVisibility(View.GONE);
+//            ((TextView)toolbar.findViewById(R.id.tv_title)).setText(title);
+//        }
+//
+//        if (isBack){
+//            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            //使左上角图标是否显示
+//            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+//            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    onBackPressedSupport();
+//                }
+//            });
+//        } else {
+//            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//            //使左上角图标是否显示
+//            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
+//
+//        }
+//    }
 
 
     @Override

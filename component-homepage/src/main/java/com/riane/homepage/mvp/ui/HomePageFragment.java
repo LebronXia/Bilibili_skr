@@ -34,8 +34,8 @@ import butterknife.OnClick;
 @Route(path = RouterConstans.PATH_HOMEPAGE_MAIN)
 public class HomePageFragment extends SimpleFragment{
 
-    @BindView(R2.id.main_toolbar)
-    Toolbar mToolbar;
+//    @BindView(R2.id.main_toolbar)
+//    Toolbar mToolbar;
 
     @BindView(R2.id.tablayout)
     TabLayout mTabLayout;
@@ -54,8 +54,8 @@ public class HomePageFragment extends SimpleFragment{
 
     @Override
     protected void initData() {
-        setToolBar(mToolbar, "", false, false);
-        setHasOptionsMenu(true);
+        //setToolBar(mToolbar, "", false, false);
+        //setHasOptionsMenu(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         RecommentFragment recommentFragment = new RecommentFragment();
         mFragments.add(recommentFragment);
@@ -69,33 +69,12 @@ public class HomePageFragment extends SimpleFragment{
         mTabLayout.setupWithViewPager(mViewPager);
     }
 
-    @OnClick(R2.id.toolbar_left_layout)
-    void toggleDrawer() {
+//    @OnClick(R2.id.toolbar_left_layout)
+//    void toggleDrawer() {
 //        Activity activity = getActivity();
 //        if (activity instanceof MainActivity) {
 //            ((MainActivity) activity).toggleDrawer();
 //        }
-    }
+//    }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
-        inflater.inflate(R.menu.homepage_main, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_game_center) {
-            //TODO
-            showMsg("游戏中心");
-
-        } else if (id == R.id.action_download) {//TODO
-
-        } else if (id == R.id.action_search) {//TODO
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

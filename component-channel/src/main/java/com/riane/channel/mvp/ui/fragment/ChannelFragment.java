@@ -28,8 +28,8 @@ import butterknife.BindView;
 @Route(path = RouterConstans.PATH_CHANNEL_MAIN)
 public class ChannelFragment extends BaseFragment<ChannelMainPresenter> implements IChannelMainContract.View{
 
-    @BindView(R2.id.main_toolbar)
-    Toolbar mToolbar;
+//    @BindView(R2.id.main_toolbar)
+//    Toolbar mToolbar;
     @BindView(R2.id.rv_channel_classify)
     RecyclerView mRvChannelClassify;
 
@@ -55,7 +55,7 @@ public class ChannelFragment extends BaseFragment<ChannelMainPresenter> implemen
 
     @Override
     protected void initData() {
-        setToolBar(mToolbar, "频道", true,false);
+        //setToolBar(mToolbar, "频道", true,false);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 4);
         mRvChannelClassify.setLayoutManager(layoutManager);
         mRvChannelClassify.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.bg_main));
